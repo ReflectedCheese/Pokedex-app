@@ -8,7 +8,7 @@
 }
 
 .water {
-  background-image: linear-gradient(49, 79, 211, 0.644);
+  background-color: #15d0dc;
 }
 
 .electric {
@@ -64,3 +64,82 @@
 }
 
 // other
+.pokedexTitle {
+  position: absolute;
+  height: 41px;
+  left: 16px;
+  right: 16px;
+  top: 90px;
+
+  /* Default/Bold/LargeTitle */
+  font-family: 'SF Pro Display';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 41px;
+
+  /* identical to box height, or 121% */
+  letter-spacing: 0.374px;
+
+  /* Dark 1 */
+  color: #1f2029;
+}
+
+.pokedexTitle {
+  font-family: 'SF Pro Text', 'SF Pro Display', -apple-system,
+    BlinkMacSystemFont, Roboto, 'Segoe UI', Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+.searchPokemon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 7px 8px;
+  gap: 6px;
+
+  position: absolute;
+  width: 343px;
+  height: 36px;
+  left: 16px;
+  top: 145px;
+
+  background: #eff0f1;
+  border-radius: 10px;
+}
+
+.myTeam {
+  position: absolute;
+
+  width: 167px;
+  height: 100px;
+  left: 16px;
+  top: 200px;
+
+  /* Purple Gradient */
+  background: linear-gradient(109.73deg, #46469c 0%, #7e32e0 100%);
+  border-radius: 10px;
+}
+
+.myFave {
+  position: absolute;
+
+  width: 167px;
+  height: 100px;
+  left: 192px;
+  top: 200px;
+
+  /* Green Gradient */
+  background: linear-gradient(109.73deg, #65cb9a 0%, #15d0dc 100%);
+  border-radius: 10px;
+}
+
+.pokemonlist-container {
+  width: 340px;
+}
+
+.listItem {
+  background: #ffffff;
+  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+}

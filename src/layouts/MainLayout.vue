@@ -1,10 +1,5 @@
 <template>
   <div class="layout-container">
-    <div class="title">Pokédex</div>
-    <!-- <div class="button-container">
-      <Button @click="onNavigate('/myTeam')" :text="'Mijn team'" />
-      <Button @click="onNavigate('/myFave')" :text="'Favorieten'" />
-    </div> -->
     <router-view />
   </div>
 </template>
