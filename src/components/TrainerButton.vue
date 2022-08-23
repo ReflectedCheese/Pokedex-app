@@ -1,13 +1,24 @@
 <template>
-  <TrainerButton>{{ text }}</TrainerButton>
+  <div id="trainerButton">
+    <div id="trainerButtonText">
+      <div id="trainerButtonTitle">{{ title }}</div>
+      <div id="trainerButtonInfo">{{ info }}</div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+  name: 'TrainerButton',
   props: {
-    text: {
+    title: {
+      type: String,
+      required: true,
+    },
+
+    info: {
       type: String,
       required: true,
     },
@@ -15,19 +26,44 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-button {
-  background-color: #eeeeee;
-  border-radius: 4px;
-  font-weight: 500;
-  border: none;
-  padding: 4px 8px;
-  color: #567868;
+<style scoped>
+#trainerButtonTitle {
+  position: absolute;
 
-  &:hover {
-    background-color: darken(#eeeeee, 10%);
-    color: #0096e8;
-    cursor: pointer;
-  }
+  width: 86px;
+  height: 22px;
+  left: 31px;
+  top: 246px;
+
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+
+  /* identical to box height, or 122% */
+  letter-spacing: -0.408px;
+
+  color: #ffffff;
+}
+
+#trainerButtonInfo {
+  position: absolute;
+
+  width: 84px;
+  height: 22px;
+  left: 31px;
+  top: 268px;
+
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+
+  /* identical to box height, or 147% */
+  letter-spacing: -0.408px;
+
+  color: rgba(255, 255, 255, 0.5);
 }
 </style>

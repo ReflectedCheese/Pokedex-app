@@ -11,7 +11,26 @@ const PokemonService = () => {
     return doGet(`https://pokeapi.co/api/v2/pokemon/${id}`);
   }
 
-  return { getPokemonList, getPokemonDetail };
+  const Types = [
+    'fire',
+    'normal',
+    'water',
+    'electric',
+    'grass',
+    'ice',
+    'fighting',
+    'poison',
+    'ground',
+    'flying',
+    'psychic',
+    'bug',
+    'rock',
+    'ghost',
+    'dragon',
+    'fairy',
+  ];
+
+  return { getPokemonList, getPokemonDetail, Types };
 };
 
 export { PokemonService };

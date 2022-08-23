@@ -1,8 +1,17 @@
-export interface Todo {
-  id: number;
-  content: string;
+export interface Sprites {
+  front_default: string;
 }
 
-export interface Meta {
-  totalCount: number;
+export interface TypeDetails {
+  slot: number;
+  type: {
+    name: string;
+  };
+}
+
+export interface Pokemon {
+  id: number;
+  name: string;
+  sprites: Sprites;
+  types: [];
 }
