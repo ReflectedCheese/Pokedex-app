@@ -1,6 +1,6 @@
 <template>
   <div class="listItem">
-    <img :src="`${image}`" alt="Pokémon" />
+    <img id="listImage" :src="`${image}`" alt="Pokémon" />
     <div id="pokemonIdentifiers">
       <div id="name">
         {{ name.charAt(0).toUpperCase() + name.slice(1) }}
@@ -12,9 +12,10 @@
           :key="index"
           :class="type.type.name"
         >
-          {{ type.type.name }}
+          {{ type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1) }}
         </div>
       </div>
+      <div id="pointSymbol">&#10095;</div>
     </div>
   </div>
 </template>

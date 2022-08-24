@@ -21,13 +21,13 @@
       <TrainerButton
         class="myTeam"
         :title="'Mijn team'"
-        :info="'number' + 'pokemons'"
+        :info="'4' + ' pokemons'"
         @click="onNavigate('/myTeam')"
       />
       <TrainerButton
         class="myFave"
         :title="'Favorieten'"
-        :info="'12' + 'pokemons'"
+        :info="'2' + ' pokemons'"
         @click="onNavigate('/myFave')"
       />
     </div>
@@ -39,6 +39,7 @@
         :name="pokemonInstance.name"
         :id="pokemonInstance.id"
         :types="pokemonInstance.types"
+        @click="setPokemon(pokemonInstance)"
       />
     </div>
 
@@ -54,8 +55,9 @@
 import { PokemonService } from 'src/services/pokemonService';
 import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import TrainerButton from 'src/components/TrainerButton.vue';
+import { Pokemon } from 'src/components/models';
 import PokemonList from 'src/components/PokemonList.vue';
+import TrainerButton from '../components/TrainerButton.vue';
 
 export default defineComponent({
   name: 'PageIndex',
@@ -64,6 +66,7 @@ export default defineComponent({
     let pokemonId;
     const { getPokemonList, getPokemonDetail } = PokemonService();
     const search = ref('');
+    const selectedPokemon = ref();
     const pokemonList = ref();
     const pokemonDetail = ref();
     getPokemonDetail('1').then((result) => (pokemonDetail.value = result));
@@ -72,14 +75,21 @@ export default defineComponent({
     function onNavigate(path: string) {
       router.push({ path }).catch(console.error);
     }
+
+    function setPokemon(selectPokemon: Pokemon) {
+      selectedPokemon.value = selectPokemon;
+      router.push({ path: `/${selectPokemon.id}` }).catch(console.error);
+    }
     return {
       pokemonList,
+      selectedPokemon,
+      setPokemon,
       pokemonDetail,
       pokemonId,
       search,
       onNavigate,
     };
   },
-  components: { TrainerButton, PokemonList },
+  components: { PokemonList, TrainerButton },
 });
 </script>
