@@ -1,50 +1,50 @@
 // type backgrounds
 .normal {
-  background-color: grey;
+  background-color: #a3acae;
 }
 
 .fire {
-  background-image: linear-gradient(#e58061, #dbb469);
+  background-color: #fd7d25;
 }
 
 .water {
-  background-color: #15d0dc;
+  background-color: #4592c3;
 }
 
 .electric {
-  background-color: rgb(207, 205, 43);
+  background-color: #dcdc16;
 }
 
 .grass {
-  background-image: linear-gradient(#7ecd8b, #89e2b3);
+  background-color: #95c24d;
 }
 
 .ice {
-  background-color: aqua;
+  background-color: #00ffff;
 }
 
 .fighting {
-  background-color: rgb(160, 70, 35);
+  background-color: #a04623;
 }
 
 .poison {
-  background-color: rgb(94, 16, 184);
+  background-color: #ba7ec8;
 }
 
 .ground {
-  background-color: rgb(180, 137, 102);
+  background-color: #b48966;
 }
 
 .flying {
-  background-color: rgb(131, 190, 194);
+  background-color: #83bec2;
 }
 
 .psychic {
-  background-color: rgb(214, 93, 149);
+  background-color: #d65d95;
 }
 
 .bug {
-  background-color: rgb(43, 94, 38);
+  background-color: #2b5e26;
 }
 
 .rock {
@@ -52,27 +52,62 @@
 }
 
 .ghost {
-  background-color: rgb(133, 93, 151);
+  background-color: #7b62a3;
 }
 
 .dragon {
-  background-color: rgb(99, 99, 209);
+  background-color: #6363d1;
 }
 
 .fairy {
-  background-color: rgba(230, 26, 185, 0.466);
+  background-color: #e61ab9;
 }
 
+.normal,
+.fire,
+.water,
+.electric,
+.grass,
+.ice,
+.fighting,
+.poison,
+.ground,
+.flying,
+.psychic,
+.bug,
+.rock,
+.ghost,
+.dragon,
+.fairy {
+  display: flex;
+  border-radius: 10px;
+  padding: 3px 10px;
+  gap: 10px;
+
+  width: 56px;
+  height: 20px;
+  left: 212px;
+  top: 416px;
+}
+
+// font import
+
+body * {
+  font-family: 'SF Pro Text', 'SF Pro Display', -apple-system,
+    BlinkMacSystemFont, Roboto, 'Segoe UI', Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
 // other
 .pokedexTitle {
-  position: absolute;
   height: 41px;
+  margin-top: 5rem;
+  margin-left: 1rem;
   left: 16px;
   right: 16px;
   top: 90px;
 
   /* Default/Bold/LargeTitle */
-  font-family: 'SF Pro Display';
+
   font-style: normal;
   font-weight: 700;
   font-size: 34px;
@@ -85,20 +120,19 @@
   color: #1f2029;
 }
 
-.pokedexTitle {
-  font-family: 'SF Pro Text', 'SF Pro Display', -apple-system,
-    BlinkMacSystemFont, Roboto, 'Segoe UI', Helvetica, Arial, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+#searchInput {
+  background-color: red;
 }
 
 .searchPokemon {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-left: 1rem;
+  margin-top: 1rem;
   padding: 7px 8px;
   gap: 6px;
 
-  position: absolute;
   width: 343px;
   height: 36px;
   left: 16px;
@@ -108,22 +142,28 @@
   border-radius: 10px;
 }
 
+.button-container {
+  display: flex;
+  flex-direction: row;
+  margin: 1rem;
+}
+
+// Trainerbuttons
 .myTeam {
-  position: absolute;
+  display: flex;
 
   width: 167px;
   height: 100px;
   left: 16px;
   top: 200px;
 
-  /* Purple Gradient */
   background: linear-gradient(109.73deg, #46469c 0%, #7e32e0 100%);
   border-radius: 10px;
 }
 
 .myFave {
-  position: absolute;
-
+  display: flex;
+  margin-left: 0.5rem;
   width: 167px;
   height: 100px;
   left: 192px;
@@ -134,12 +174,146 @@
   border-radius: 10px;
 }
 
+#TrainerButtonTitle {
+  display: flex;
+  margin-top: 3rem;
+  margin-left: 1rem;
+  width: 86px;
+  height: 22px;
+  left: 31px;
+  top: 246px;
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+
+  /* identical to box height, or 122% */
+  letter-spacing: -0.408px;
+
+  color: #ffffff;
+}
+
+#TrainerButtonInfo {
+  display: flex;
+  margin-left: 1rem;
+
+  width: 84px;
+  height: 22px;
+  left: 31px;
+  top: 268px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+
+  /* identical to box height, or 147% */
+  letter-spacing: -0.408px;
+
+  color: rgba(255, 255, 255, 0.5);
+}
+
 .pokemonlist-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  gap: 10px;
   width: 340px;
 }
 
 .listItem {
+  display: flex;
+
+  width: 340px;
+  height: 70px;
+  left: 19px;
+  top: 320px;
+
   background: #ffffff;
   box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.04);
   border-radius: 10px;
+  gap: 5px;
+}
+
+#listImage {
+  display: flex;
+  margin-left: 1rem;
+  margin-top: 0.6rem;
+  width: 50px;
+  height: 50px;
+  left: 33px;
+  top: 330px;
+}
+
+#types {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-left: 12rem;
+  margin-top: -2.4rem;
+
+  // align-items: flex-start;
+  padding: 3px 10px;
+  gap: 10px;
+  border-radius: 10px;
+  width: 52px;
+  height: 20px;
+  left: 214px;
+  // top: 335px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: right;
+  letter-spacing: 0.374px;
+
+  color: #ffffff;
+}
+
+#name {
+  display: flex;
+  margin-top: 1rem;
+
+  width: 54px;
+  height: 20px;
+  left: 99px;
+  top: 335px;
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: 0.374px;
+
+  color: #000000;
+}
+
+#id {
+  display: flex;
+  width: 49px;
+  height: 18px;
+  left: 99px;
+  top: 356px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+
+  /* identical to box height */
+  letter-spacing: 0.374px;
+
+  color: #919698;
+}
+
+#pointSymbol {
+  margin-left: 15.5rem;
+  margin-top: -1.1rem;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  color: #babec2;
 }
