@@ -42,13 +42,7 @@
         @click="setPokemon(pokemonInstance)"
       />
     </div>
-
-    <!-- <div v-if="pokemonDetail" style="color: deeppink">
-      {{ pokemonDetail.name }}
-    </div> -->
   </div>
-
-  <!-- <div v-if="pokemonList">{{ pokemonList }}</div> -->
 </template>
 
 <script lang="ts">
@@ -64,12 +58,12 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     let pokemonId;
-    const { getPokemonList, getPokemonDetail } = PokemonService();
+    const { getPokemonList } = PokemonService();
     const search = ref('');
     const selectedPokemon = ref();
     const pokemonList = ref();
     const pokemonDetail = ref();
-    getPokemonDetail('1').then((result) => (pokemonDetail.value = result));
+
     getPokemonList().then((result) => (pokemonList.value = result));
 
     function onNavigate(path: string) {

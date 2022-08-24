@@ -8,6 +8,7 @@
       <div id="id">Nr. {{ id }}</div>
       <div id="types">
         <div
+          class="pokemonTypeButton"
           v-for="(type, index) in types"
           :key="index"
           :class="type.type.name"
