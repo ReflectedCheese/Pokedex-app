@@ -8,6 +8,7 @@ const routes: RouteRecordRaw[] = [
       { path: '', component: () => import('pages/IndexPage.vue') },
       { path: '/myFave', component: () => import('pages/MyFave.vue') },
       { path: '/myTeam', component: () => import('pages/MyTeam.vue') },
+      { path: '/:id', component: () => import('pages/DetailPage.vue') },
     ],
   },
 
