@@ -1,7 +1,7 @@
 <template>
-  <div class="layout-container">
+  <q-layout class="q-layout" view="lHh Lpr lFf">
     <router-view />
-  </div>
+  </q-layout>
 </template>
 
 <script lang="ts">
@@ -14,11 +14,9 @@ export default defineComponent({
   name: 'MainLayout',
   setup() {
     const router = useRouter();
-
     function onNavigate(path: string) {
       router.push({ path }).catch(console.error);
     }
-
     return {
       onNavigate,
     };

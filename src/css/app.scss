@@ -1,69 +1,73 @@
 // type buttons
-.normal {
+.normalBackground {
   background-color: #a3acae;
 }
 
-.fire {
+.fireBackground {
   background-color: #fd7d25;
 }
 
-.water {
+.waterBackground {
   background-color: #4592c3;
 }
 
-.electric {
+.electricBackground {
   background-color: #dcdc16;
 }
 
-.grass {
+.grassBackground {
   background-color: #95c24d;
 }
 
-.ice {
+.iceBackground {
   background-color: #00ffff;
 }
 
-.fighting {
+.fightingBackground {
   background-color: #a04623;
 }
 
-.poison {
+.poisonBackground {
   background-color: #ba7ec8;
 }
 
-.ground {
+.groundBackground {
   background-color: #b48966;
 }
 
-.flying {
+.flyingBackground {
   background-color: #83bec2;
 }
 
-.psychic {
+.psychicBackground {
   background-color: #d65d95;
 }
 
-.bug {
+.bugBackground {
   background-color: #2b5e26;
 }
 
-.rock {
+.rockBackground {
   background-color: burlywood;
 }
 
-.ghost {
+.ghostBackground {
   background-color: #7b62a3;
 }
 
-.dragon {
-  background-color: #6363d1;
+.dragonBackground {
+  background: linear-gradient(180deg, #6363d1 0%, #8080d1 100%);
 }
 
-.fairy {
-  background-color: #e61ab9;
+.fairyBackground {
+  background: linear-gradient(180deg, #e61ab9 0%, #df5cc3 100%);
 }
 
-.pokemonTypeButton {
+.grassBackground {
+  background: linear-gradient(180deg, #7ecd8b 0%, #89e2b3 100%);
+}
+
+#pokemonTypeButton {
   display: flex;
   border-radius: 10px;
   padding: 3px 10px;
@@ -391,7 +395,7 @@ body * {
   text-align: center;
   letter-spacing: 0.38px;
 
-  color: red;
+  color: white;
 }
 
 #BackText {
@@ -409,9 +413,15 @@ body * {
   align-items: center;
   letter-spacing: -0.408px;
 
+  color: white;
+}
+
+.q-layout {
   color: red;
 }
 
+.q-header {
+}
 .DetailTitle {
   display: flex;
   height: 41px;
@@ -429,5 +439,135 @@ body * {
   /* identical to box height, or 121% */
   letter-spacing: 0.374px;
 
-  color: red;
+  color: white;
+}
+
+.DetailImage {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  margin-left: 5rem;
+  margin-bottom: 1rem;
+  width: 207px;
+  height: 207px;
+  left: 77px;
+  top: 152px;
+  z-index: 2;
+}
+
+.Shadow {
+  width: 213px;
+  height: 12px;
+  left: 81px;
+  top: 335px;
+  z-index: 1;
+  margin-top: -2rem;
+
+  background: rgba(0, 0, 0, 0.3);
+  filter: blur(15px);
+}
+
+.InfoSubText {
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  width: 343px;
+  height: 330px;
+  left: 16px;
+  top: 420px;
+  margin-left: 1rem;
+
+  background: #ffffff;
+  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+}
+
+#description {
+  display: flex;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  width: 303px;
+  height: 54px;
+  left: 36px;
+  top: 443px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: -0.408px;
+
+  color: #000000;
+}
+
+.topText {
+  width: 46px;
+  height: 14px;
+  left: 16px;
+  top: 399px;
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  letter-spacing: 0.374px;
+
+  color: #ffffff;
+}
+
+.info {
+  display: flex;
+  width: 59px;
+  height: 18px;
+  left: 36px;
+  top: 552px;
+  margin-left: 1rem;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+
+  /* identical to box height */
+  letter-spacing: -0.408px;
+
+  color: #acb2c1;
+}
+
+.answer {
+  display: flex;
+  width: 26px;
+  height: 18px;
+  left: 159px;
+  top: 552px;
+  margin-left: 5rem;
+  margin-bottom: 1rem;
+
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+
+  /* identical to box height */
+  letter-spacing: -0.408px;
+
+  /* Dark 1 */
+  color: #1f2029;
+}
+.infoBold {
+  font-weight: 600;
+}
+
+#number,
+#height,
+#weight,
+#sex,
+#ability {
+  display: flex;
+  flex-direction: row;
 }
