@@ -1,7 +1,5 @@
 <template>
-  <div class="layout-container">
-    <router-view />
-  </div>
+  <router-view />
 </template>
 
 <script lang="ts">
@@ -14,11 +12,9 @@ export default defineComponent({
   name: 'DetailsLayout',
   setup() {
     const router = useRouter();
-
     function onNavigate(path: string) {
       router.push({ path }).catch(console.error);
     }
-
     return {
       onNavigate,
     };

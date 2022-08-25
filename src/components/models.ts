@@ -13,5 +13,8 @@ export interface Pokemon {
   id: number;
   name: string;
   sprites: Sprites;
+  other: string;
+  official_artwork: string;
+  front_default: string;
   types: [];
 }

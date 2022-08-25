@@ -3,12 +3,12 @@
     <img id="listImage" :src="`${image}`" alt="Pokémon" />
     <div id="pokemonIdentifiers">
       <div id="name">
-        {{ name.charAt(0).toUpperCase() + name.slice(1) }}
+        {{ name.charAt(0).toUpperCase() + name.slice(1).split('-')[0] }}
       </div>
       <div id="id">Nr. {{ id }}</div>
       <div id="types">
         <div
-          class="pokemonTypeButton"
+          id="pokemonTypeButton"
           v-for="(type, index) in types"
           :key="index"
           :class="type.type.name"
