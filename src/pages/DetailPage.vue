@@ -1,14 +1,10 @@
+<!-- eslint-disable @typescript-eslint/ban-ts-comment -->
 <template>
   <div
-    id="detailPage"
     class="PokemonDetailContainer"
     v-if="pokemonDetail"
     :class="pokemonDetail.types[0].type.name + 'Background'"
   >
-    <div class="Header">
-      <BackButton id="Back" @click="goBack()" />
-    </div>
-
     <div class="DetailTitle" v-if="pokemonDetail">
       {{
         pokemonDetail.forms[0].name.charAt(0).toUpperCase() +
@@ -23,23 +19,32 @@
         <img class="Shadow" src="images\Ellipse 2.png" />
       </div>
     </div>
+    <!-- About Section-->
     <div id="about">
       <div class="topText">ABOUT</div>
       <div class="infoContainer">
-        <div id="description">Gotta catch 'em all!</div>
+        <div id="description">
+          Vanaf de dag dat deze Pokémon wordt geboren, zit er een plantenzaadje
+          op zijn rug. Het zaad wordt langzaam groter.
+        </div>
         <div id="aboutList">
-          <div id="type" class="info">
-            <span>Type</span>
-            <span
-              id="pokemonTypeButton"
-              v-for="(type, index) in pokemonDetail.types"
-              :key="index"
-              :class="type.type.name"
-            >
-              {{
-                type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)
-              }}
-            </span>
+          <div id="type">
+            <div class="info">Type</div>
+            <div class="answer">
+              <div id="typesDetailButton">
+                <div
+                  id="pokemonTypeButton"
+                  v-for="(type, index) in pokemonDetail.types"
+                  :key="index"
+                  :class="type.type.name"
+                >
+                  {{
+                    type.type.name.charAt(0).toUpperCase() +
+                    type.type.name.slice(1)
+                  }}
+                </div>
+              </div>
+            </div>
           </div>
           <div id="number">
             <div class="info">Nummer</div>
@@ -56,17 +61,74 @@
           </div>
           <div id="sex">
             <div class="info">Geslacht</div>
-            <div class="answer">
+            <div class="answer" id="sex">
               {{ gender(pokemonDetail.name) }}
             </div>
           </div>
 
           <div id="ability">
             <div class="info">Vaardigheden</div>
-            <div class="answer">
+            <span class="answer">
               {{ pokemonDetail.abilities[0].ability.name }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Stats Section-->
+    <div id="stats">
+      <div class="topText">STATISTIEKEN</div>
+      <div class="statContainer">
+        <div>
+          <div
+            class="row no-wrap"
+            v-for="(stat, index) in pokemonDetail.stats"
+            :key="index"
+          >
+            <div class="info col-2">{{ formatStatName(stat.stat.name) }}</div>
+            <div class="numberStat col-2">
+              {{ stat.base_stat }}
+            </div>
+            <div class="q-ml-xs q-mr-sm col-6">
+              <q-linear-progress
+                :value="stat.base_stat / 90"
+                rounded
+                size="5px"
+                :color="stat.base_stat > 45 ? 'green' : 'red'"
+              />
             </div>
           </div>
+          <div class="row no-wrap">
+            <div class="info col-2">Total</div>
+            <div class="numberStat col-2">90</div>
+            <div class="q-ml-xs q-mr-sm col-6">
+              <q-linear-progress
+                :value="1"
+                rounded
+                size="5px"
+                :color="'green'"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Moveset Section-->
+    <div id="moveset">
+      <div class="topText">MOVESET</div>
+      <div class="movesetContainer" id="movesetContainer">
+        <div
+          class="moveset"
+          v-for="(move, index) in moves(pokemonDetail.moves)"
+          :key="index"
+        >
+          <div class="level">
+            Level
+            {{ move.version_group_details[0].level_learned_at }}
+          </div>
+          <span class="moveName">
+            {{ move.move.name.replace('-', '&nbsp;') }}
+          </span>
         </div>
       </div>
     </div>
@@ -78,7 +140,6 @@ import { PokemonService } from 'src/services/pokemonService';
 import { defineComponent, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { Pokemon } from 'src/components/models';
-import BackButton from '../components/BackButton.vue';
 
 export default defineComponent({
   name: 'DetailPage',
@@ -92,6 +153,7 @@ export default defineComponent({
     const selectedPokemon = ref();
     const pokemonDetail = ref();
     const pokemonList = ref();
+    // @ts-ignore:next-line
     getPokemonDetail(id).then((result) => (pokemonDetail.value = result));
 
     function goBack() {
@@ -142,8 +204,29 @@ export default defineComponent({
       }
       return '♂♀';
     },
+    // @ts-ignore:next-line
+    moves: function (allMoves: Array) {
+      return (
+        allMoves
+          // @ts-ignore:next-line
+          .filter((move) => move.version_group_details[0].level_learned_at > 0)
+          .slice(0, 4)
+      );
+    },
+    formatStatName: function (statName: string) {
+      const statNameMapping = {
+        hp: 'HP',
+        attack: 'Attack',
+        defense: 'Defense',
+        special_attack: 'Sp.Atk',
+        special_defense: 'Sp.Def',
+        speed: 'Speed',
+      };
+      // @ts-ignore:next-line
+      return statNameMapping[statName.replace('-', '_')];
+    },
   },
 
-  components: { BackButton },
+  components: {},
 });
 </script>

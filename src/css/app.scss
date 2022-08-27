@@ -70,13 +70,10 @@
 #pokemonTypeButton {
   display: flex;
   border-radius: 10px;
-  padding: 3px 10px;
-  gap: 10px;
-
-  width: 56px;
+  padding: 10px;
+  width: 65px;
   height: 20px;
-  left: 212px;
-  top: 416px;
+  text-align: center;
 }
 // backgrounds
 
@@ -155,7 +152,7 @@ body * {
 // other
 .pokedexTitle {
   height: 41px;
-  margin-top: 5rem;
+  margin-top: 1rem;
   margin-left: 1rem;
   left: 16px;
   right: 16px;
@@ -173,10 +170,6 @@ body * {
 
   /* Dark 1 */
   color: #1f2029;
-}
-
-#searchInput {
-  background-color: red;
 }
 
 .searchPokemon {
@@ -308,19 +301,16 @@ body * {
   margin-left: 12rem;
   margin-top: -2.4rem;
 
-  // align-items: flex-start;
   padding: 3px 10px;
   gap: 10px;
   border-radius: 10px;
   width: 52px;
   height: 20px;
-  left: 214px;
-  // top: 335px;
 
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
-  line-height: 14px;
+  line-height: 0px;
   text-align: right;
   letter-spacing: 0.374px;
 
@@ -377,8 +367,8 @@ body * {
 #Back {
   display: flex;
   flex-direction: row;
-  margin-top: 3rem;
-  margin-left: 1rem;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
   cursor: pointer;
 }
 
@@ -416,19 +406,12 @@ body * {
   color: white;
 }
 
-.q-layout {
-  color: red;
-}
-
-.q-header {
-}
 .DetailTitle {
   display: flex;
   height: 41px;
   left: 16px;
   right: 16px;
-  top: 90px;
-  margin-top: 0.5rem;
+
   margin-left: 1rem;
 
   font-style: normal;
@@ -451,15 +434,12 @@ body * {
   width: 207px;
   height: 207px;
   left: 77px;
-  top: 152px;
-  z-index: 2;
 }
 
 .Shadow {
   width: 213px;
   height: 12px;
   left: 81px;
-  top: 335px;
   z-index: 1;
   margin-top: -2rem;
 
@@ -478,6 +458,7 @@ body * {
   left: 16px;
   top: 420px;
   margin-left: 1rem;
+  margin-bottom: 2rem;
 
   background: #ffffff;
   box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.04);
@@ -486,8 +467,9 @@ body * {
 
 #description {
   display: flex;
-  margin-top: 1rem;
+  margin-top: 1.3rem;
   margin-left: 1rem;
+  margin-bottom: 1.3rem;
   width: 303px;
   height: 54px;
   left: 36px;
@@ -507,7 +489,7 @@ body * {
   height: 14px;
   left: 16px;
   top: 399px;
-  margin-left: 1rem;
+  margin-left: 1.1rem;
   margin-bottom: 0.5rem;
 
   font-style: normal;
@@ -527,6 +509,7 @@ body * {
   left: 36px;
   top: 552px;
   margin-left: 1rem;
+  margin-bottom: 1rem;
 
   font-style: normal;
   font-weight: 400;
@@ -539,8 +522,29 @@ body * {
   color: #acb2c1;
 }
 
-.answer {
+.answerButtonText {
   display: flex;
+
+  margin-left: 0.5rem;
+
+  padding: 3px 10px;
+  gap: 10px;
+  border-radius: 10px;
+  width: 52px;
+  height: 20px;
+  left: 214px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: right;
+  letter-spacing: 0.374px;
+
+  color: #ffffff;
+}
+
+.answer {
   width: 26px;
   height: 18px;
   left: 159px;
@@ -559,10 +563,40 @@ body * {
   /* Dark 1 */
   color: #1f2029;
 }
+
+.answer::first-letter {
+  text-transform: capitalize;
+}
+
+#pokemonTypeInfoButton {
+  display: flex;
+
+  border-radius: 10px;
+
+  width: 65px;
+  height: 20px;
+}
+
+#typesDetailButton {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  width: 52px;
+  height: 20px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 0;
+  letter-spacing: 0.374px;
+
+  color: #ffffff;
+}
+
 .infoBold {
   font-weight: 600;
 }
-
+#type,
 #number,
 #height,
 #weight,
@@ -570,4 +604,105 @@ body * {
 #ability {
   display: flex;
   flex-direction: row;
+}
+
+.statContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px 10px 5px;
+  margin-left: 1rem;
+  margin-bottom: 2rem;
+  width: 343px;
+  height: 280px;
+  left: 16px;
+  top: 802px;
+
+  background: #ffffff;
+  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+}
+
+.numberStat {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  margin-left: 0.5rem;
+
+  letter-spacing: -0.408px;
+  color: #1f2029;
+}
+
+.movesetContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  margin-left: 1rem;
+  width: 343px;
+  height: 105px;
+  left: 16px;
+  top: 1077px;
+
+  background: #ffffff;
+  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+}
+
+.moveset {
+  display: flex;
+  flex-direction: row;
+}
+
+.level {
+  display: flex;
+  align-items: center;
+
+  background-color: rgba(164, 126, 189, 0.719);
+  border: 0.05rem solid rgb(149, 93, 187);
+  padding: 0.8rem 1rem;
+  border-radius: 1rem;
+  margin: 1rem 0.5rem 0.5rem 1rem;
+
+  width: 4.3rem;
+  height: 1.3rem;
+
+  font-style: normal;
+  font-weight: 800;
+  font-size: 9px;
+  line-height: 14px;
+  text-align: center;
+  letter-spacing: -0.5px;
+
+  color: #643cc0;
+}
+
+.moveName {
+  width: 4rem;
+  height: 20px;
+  left: 108px;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 55px;
+
+  /* identical to box height, or 133% */
+  letter-spacing: -0.5px;
+
+  color: #1f2029;
+}
+
+.moveName::first-letter {
+  text-transform: uppercase;
+}
+
+.detailPageHeader {
+  backdrop-filter: blur(20px);
+}
+
+.PokemonDetailContainer {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
 }
