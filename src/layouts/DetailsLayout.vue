@@ -1,10 +1,5 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header class="transparent detailPageHeader">
-      <q-toolbar>
-        <back-button id="Back" @click="goBack()" />
-      </q-toolbar>
-    </q-header>
     <router-view />
   </q-layout>
 </template>
@@ -13,7 +8,6 @@
 import { defineComponent } from 'vue';
 // import TrainerButton from 'components/TrainerButton.vue';
 import { useRouter } from 'vue-router';
-import BackButton from 'src/components/BackButton.vue';
 
 export default defineComponent({
   // components: { TrainerButton },
@@ -32,6 +26,6 @@ export default defineComponent({
       goBack,
     };
   },
-  components: { BackButton },
+  components: {},
 });
 </script>

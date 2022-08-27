@@ -1,5 +1,7 @@
 <template>
-  <div class="faveContainer">TEST</div>
+  <div class="faveContainer">
+    <div class="DetailTitle">Favorieten</div>
+  </div>
 </template>
 
 <script lang="ts">

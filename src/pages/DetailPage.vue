@@ -1,5 +1,11 @@
 <!-- eslint-disable @typescript-eslint/ban-ts-comment -->
 <template>
+  <q-header class="transparent detailPageHeader">
+    <div>
+      <BackButton id="Back" @click="goBack()" />
+      <HeartButton class="Heart" @click="editFavorites(selectedPokemon)" />
+    </div>
+  </q-header>
   <div
     class="PokemonDetailContainer"
     v-if="pokemonDetail"
@@ -140,6 +146,8 @@ import { PokemonService } from 'src/services/pokemonService';
 import { defineComponent, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { Pokemon } from 'src/components/models';
+import BackButton from 'src/components/BackButton.vue';
+import HeartButton from 'src/components/HeartButton.vue';
 
 export default defineComponent({
   name: 'DetailPage',
@@ -227,6 +235,6 @@ export default defineComponent({
     },
   },
 
-  components: {},
+  components: { BackButton, HeartButton },
 });
 </script>
