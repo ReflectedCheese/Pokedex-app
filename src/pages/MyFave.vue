@@ -1,5 +1,5 @@
 <template>
-  <h4>Favorieten</h4>
+  <div class="faveContainer">TEST</div>
 </template>
 
 <script lang="ts">
@@ -9,3 +9,9 @@ export default defineComponent({
   name: 'myFave',
 });
 </script>
+
+<style scoped>
+.faveContainer {
+  padding-top: 50px;
+}
+</style>

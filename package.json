@@ -18,7 +18,8 @@
     "pinia": "^2.0.11",
     "quasar": "^2.6.0",
     "vue": "^3.0.0",
-    "vue-router": "^4.0.0"
+    "vue-router": "^4.0.0",
+    "vuejs-progress-bar": "^1.2.8"
   },
   "devDependencies": {
     "@quasar/app-webpack": "^3.0.0",
