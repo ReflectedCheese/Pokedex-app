@@ -20,7 +20,7 @@
 }
 
 .iceBackground {
-  background-color: #00ffff;
+  background-color: #06bfbf;
 }
 
 .fightingBackground {
@@ -99,7 +99,7 @@
 }
 
 .ice {
-  background-color: #00ffff;
+  background-color: #06bfbf;
 }
 
 .fighting {
@@ -152,7 +152,7 @@ body * {
 // other
 .pokedexTitle {
   height: 41px;
-  margin-top: 1rem;
+  margin-top: 4rem;
   margin-left: 1rem;
   left: 16px;
   right: 16px;
@@ -178,22 +178,14 @@ body * {
   align-items: center;
   margin-left: 1rem;
   margin-top: 1rem;
-  padding: 7px 8px;
-  gap: 6px;
-
   width: 343px;
-  height: 36px;
-  left: 16px;
-  top: 145px;
-
-  background: #eff0f1;
-  border-radius: 10px;
 }
 
 .button-container {
   display: flex;
   flex-direction: row;
   margin: 1rem;
+  cursor: pointer;
 }
 
 // Trainerbuttons
@@ -208,6 +200,9 @@ body * {
   background: linear-gradient(109.73deg, #46469c 0%, #7e32e0 100%);
   border-radius: 10px;
 }
+.myTeam:hover {
+  background: #a780da;
+}
 
 .myFave {
   display: flex;
@@ -220,6 +215,9 @@ body * {
   /* Green Gradient */
   background: linear-gradient(109.73deg, #65cb9a 0%, #15d0dc 100%);
   border-radius: 10px;
+}
+.myFave:hover {
+  background: #03b6c3;
 }
 
 #TrainerButtonTitle {
@@ -262,6 +260,10 @@ body * {
   color: rgba(255, 255, 255, 0.5);
 }
 
+.Pokebal {
+  margin-left: -1rem;
+}
+
 .pokemonlist-container {
   display: flex;
   flex-direction: column;
@@ -283,6 +285,10 @@ body * {
   border-radius: 10px;
   gap: 5px;
   cursor: pointer;
+}
+
+.listItem:hover {
+  background: #d0d8d8;
 }
 
 #listImage {
@@ -445,9 +451,6 @@ body * {
 
   background: rgba(0, 0, 0, 0.3);
   filter: blur(15px);
-}
-
-.InfoSubText {
 }
 
 .infoContainer {
@@ -639,6 +642,7 @@ body * {
   flex-wrap: wrap;
 
   margin-left: 1rem;
+  margin-bottom: 2rem;
   width: 343px;
   height: 105px;
   left: 16px;
@@ -659,7 +663,7 @@ body * {
   align-items: center;
 
   background-color: rgba(164, 126, 189, 0.719);
-  border: 0.05rem solid rgb(149, 93, 187);
+  border: 1.3px solid rgb(126, 39, 184);
   padding: 0.8rem 1rem;
   border-radius: 1rem;
   margin: 1rem 0.5rem 0.5rem 1rem;
@@ -684,7 +688,7 @@ body * {
 
   font-style: normal;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 55px;
 
   /* identical to box height, or 133% */
