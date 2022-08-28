@@ -1,23 +1,22 @@
 <template>
   <q-header class="bg-white">
     <q-toolbar id="toolbar">
-      <img class="Filter" src="images\Filter.png" />
-      <img class="ArrowUp" src="images\ArrowUp.png" />
-      <img class="ArrowDown" src="images\ArrowDown.png" />
+      <img
+        class="Filter"
+        src="images\Filter.png"
+        @click="showFilterModal = true"
+      />
+      <span class="sortIcons" @click="showSortModal = true">
+        <img class="ArrowUp" src="images\ArrowUp.png" />
+        <img class="ArrowDown" src="images\ArrowDown.png" />
+      </span>
     </q-toolbar>
   </q-header>
 
   <div id="pokedex">
     <div class="pokedexTitle">Pokédex</div>
-    <button @click="sortPokemonList('name', 'desc')">
-      sorteer op naam aflopend
-    </button>
-    <button @click="filterPokemonListByType('fire')">
-      filter op fire type
-    </button>
 
     <div class="searchPokemon">
-      <!-- <form @submit="pressed(search.toString())"> -->
       <q-input
         style="width: 343px"
         rounded
@@ -32,7 +31,6 @@
           <q-icon name="search" />
         </template>
       </q-input>
-      <!-- </form> -->
     </div>
 
     <div class="button-container">
@@ -61,6 +59,99 @@
       />
     </div>
   </div>
+  <div
+    class="modal"
+    :class="{ showModal: showFilterModal, hideModal: !showFilterModal }"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <span @click="showFilterModal = false" class="close">&times;</span>
+        <div class="sortTitle">Filter op</div>
+      </div>
+      <q-select
+        filled
+        id="typeForm"
+        v-model="selectedFilter"
+        :options="filterOptions"
+        label="Type Pokemon"
+      />
+      <div class="formTypeButton">
+        <button
+          class="toepassen"
+          @click="
+            showFilterModal = false;
+            filterPokemonListByType(selectedFilter);
+          "
+        >
+          Toepassen
+        </button>
+      </div>
+
+      <!-- @click="filterPokemonListByType('fire')"> -->
+    </div>
+  </div>
+  <div
+    class="modal"
+    :class="{ showModal: showSortModal, hideModal: !showSortModal }"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <span @click="showSortModal = false" class="close">&times;</span>
+        <div class="sortTitle">Sorteren op</div>
+
+        <div class="sortField">
+          <q-field rounded outlined class="q-pb-sm">
+            <template v-slot:control>
+              <div
+                class="self-center full-width no-outline"
+                tabindex="0"
+                @click="sortPokemonList('name', 'asc')"
+              >
+                Alfabetisch oplopend
+              </div>
+            </template>
+          </q-field>
+          <q-field rounded outlined class="q-pb-sm">
+            <template v-slot:control>
+              <div
+                class="self-center full-width no-outline"
+                tabindex="0"
+                @click="sortPokemonList('name', 'desc')"
+              >
+                Alfabetisch aflopend
+              </div>
+            </template>
+          </q-field>
+          <q-field rounded outlined class="q-pb-sm">
+            <template v-slot:control>
+              <div
+                class="self-center full-width no-outline"
+                tabindex="0"
+                @click="sortPokemonList('id', 'asc')"
+              >
+                Numeriek oplopend
+              </div>
+            </template>
+          </q-field>
+          <q-field rounded outlined class="q-pb-sm">
+            <template v-slot:control>
+              <div
+                class="self-center full-width no-outline"
+                tabindex="0"
+                @click="sortPokemonList('id', 'desc')"
+              >
+                Numeriek aflopend
+              </div>
+            </template>
+          </q-field>
+
+          <button class="toepassen" @click="showSortModal = false">
+            Toepassen
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -78,12 +169,12 @@ export default defineComponent({
     const router = useRouter();
     let pokemonId;
     const { getPokemonList } = PokemonService();
-
     const selectedPokemon = ref();
-
     const pokemonDetail = ref();
-    const pokemonList = ref();
+    const pokemonList = ref([]);
     const searchQuery = ref('');
+    const selectedFilter = ref('');
+    const filteredPokemonList = ref([]);
 
     function onNavigate(path: string) {
       router.push({ path }).catch(console.error);
@@ -95,25 +186,25 @@ export default defineComponent({
     }
     onMounted(async () => {
       pokemonList.value = await getPokemonList();
-      // @ts-ignore:next-line
+      filteredPokemonList.value = pokemonList.value;
     });
 
     const searchedPokemonList = computed(() => {
       if (!searchQuery.value) {
-        return pokemonList.value;
+        return filteredPokemonList.value;
       }
 
       if (parseInt(searchQuery.value)) {
-        // @ts-ignore:next-line
-        return pokemonList.value.filter((pokemon) => {
+        return filteredPokemonList.value.filter((pokemon) => {
           return (
+            // @ts-ignore:next-line
             pokemon.id.toString().indexOf(searchQuery.value.toLowerCase()) != -1
           );
         });
       }
-      // @ts-ignore:next-line
-      return pokemonList.value.filter((pokemon) => {
+      return filteredPokemonList.value.filter((pokemon) => {
         return (
+          // @ts-ignore:next-line
           pokemon.name.toLowerCase().indexOf(searchQuery.value.toLowerCase()) !=
           -1
         );
@@ -121,6 +212,24 @@ export default defineComponent({
     });
 
     return {
+      filterOptions: [
+        'grass',
+        'fire',
+        'water',
+        'bug',
+        'normal',
+        'poison',
+        'electric',
+        'ground',
+        'fairy',
+        'fighting',
+        'psychic',
+        'rock',
+        'ghost',
+        'ice',
+        'dragon',
+        'flying',
+      ],
       pokemonList,
       searchedPokemonList,
       selectedPokemon,
@@ -129,22 +238,26 @@ export default defineComponent({
       pokemonId,
       searchQuery,
       onNavigate,
+      filteredPokemonList,
+      selectedFilter,
     };
   },
   methods: {
     sortPokemonList(property: string, direction: string) {
       if (direction === 'asc') {
         // @ts-ignore:next-line
-        this.pokemonList = sort(this.pokemonList).asc(property);
+        this.filteredPokemonList = sort(this.filteredPokemonList).asc(property);
       } else {
         // @ts-ignore:next-line
-        this.pokemonList = sort(this.pokemonList).desc(property);
+        this.filteredPokemonList = sort(this.filteredPokemonList).desc(
+          property
+        );
       }
     },
 
     filterPokemonListByType(pokemonFilterType: string) {
       // @ts-ignore:next-line
-      this.pokemonList = this.pokemonList.filter((pokemon) => {
+      this.filteredPokemonList = this.pokemonList.filter((pokemon) => {
         return (
           // @ts-ignore:next-line
           pokemon.types.some((pokemonType) => {
@@ -153,6 +266,12 @@ export default defineComponent({
         );
       });
     },
+  },
+  data() {
+    return {
+      showFilterModal: false,
+      showSortModal: false,
+    };
   },
 
   components: { PokemonList, TrainerButton },
@@ -167,5 +286,144 @@ export default defineComponent({
 
 .Filter {
   margin-right: 0.6rem;
+}
+.sortTitle {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: -0.408px;
+  margin-bottom: 1.3rem;
+  padding-left: 0.5rem;
+
+  /* Dark 1 */
+  color: #1f2029;
+}
+.modal {
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.showModal {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.4s ease-in, visibility 0ms ease-in 0ms;
+}
+
+.hideModal {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.4s ease-in, visibility 0ms ease-in 0.2s;
+}
+
+.modal-content {
+  position: fixed;
+  bottom: 0;
+  background-color: #fefefe;
+  width: 100%;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s;
+}
+
+.sortItems {
+  width: 346px;
+  height: 40px;
+  left: 13px;
+  top: 518px;
+  cursor: pointer;
+  margin-bottom: 0.8rem;
+  background: #f7f7f9;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  padding-left: 10px;
+
+  letter-spacing: -0.408px;
+
+  color: #000000;
+}
+
+.formTypeButton {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-left: 3rem;
+}
+.toepassen {
+  width: 343px;
+  height: 44px;
+  left: 16px;
+  top: 734px;
+  cursor: pointer;
+
+  background: #1f2029;
+  border-radius: 100px;
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: -0.408px;
+
+  color: #ffffff;
+}
+
+.close {
+  color: grey;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 30px 20px;
+  background-color: white;
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: -0.408px;
+
+  color: #1f2029;
+}
+
+@-webkit-keyframes slideIn {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
 }
 </style>
