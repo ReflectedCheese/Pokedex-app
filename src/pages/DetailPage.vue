@@ -3,7 +3,8 @@
   <q-header class="transparent detailPageHeader">
     <div>
       <BackButton id="Back" @click="goBack()" />
-      <HeartButton class="Heart" @click="editFavorites(selectedPokemon)" />
+      <HeartButton class="Heart" />
+      <!-- <HeartButton class="Heart" @click="editFavorites(selectedPokemon)" /> -->
     </div>
   </q-header>
   <div
@@ -91,12 +92,15 @@
             v-for="(stat, index) in pokemonDetail.stats"
             :key="index"
           >
-            <div class="info col-2">{{ formatStatName(stat.stat.name) }}</div>
-            <div class="numberStat col-2">
+            <div class="info col-2">
+              {{ formatStatName(stat.stat.name) }}
+            </div>
+            <div class="numberStat col-2" id="numberStats">
               {{ stat.base_stat }}
             </div>
             <div class="q-ml-xs q-mr-sm col-6">
               <q-linear-progress
+                id="progressBar"
                 :value="stat.base_stat / 90"
                 rounded
                 size="5px"
@@ -106,9 +110,10 @@
           </div>
           <div class="row no-wrap">
             <div class="info col-2">Total</div>
-            <div class="numberStat col-2">90</div>
+            <div class="numberStat col-2" id="numberStats90">90</div>
             <div class="q-ml-xs q-mr-sm col-6">
               <q-linear-progress
+                id="progressBar90"
                 :value="1"
                 rounded
                 size="5px"
@@ -210,7 +215,7 @@ export default defineComponent({
       if (pokemonName.split('-').length > 1) {
         return pokemonName.split('-')[1] === 'm' ? '♂' : '♀';
       }
-      return '♂♀';
+      return '♂ ♀';
     },
     // @ts-ignore:next-line
     moves: function (allMoves: Array) {
@@ -238,3 +243,18 @@ export default defineComponent({
   components: { BackButton, HeartButton },
 });
 </script>
+
+<style scoped>
+#progressBar,
+#progressBar90 {
+  margin-top: 0.4rem;
+}
+
+#numberStats,
+#numberStats90 {
+  margin-left: 1rem;
+}
+
+#sex {
+}
+</style>

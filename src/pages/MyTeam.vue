@@ -1,5 +1,7 @@
 <template>
-  <h4>Mijn team</h4>
+  <div class="faveContainer">
+    <div class="DetailTitle">Mijn Team</div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -9,3 +11,9 @@ export default defineComponent({
   name: 'myTeam',
 });
 </script>
+
+<style scoped>
+.faveContainer {
+  padding-top: 50px;
+}
+</style>

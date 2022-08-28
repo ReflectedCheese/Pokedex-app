@@ -4,6 +4,7 @@
       <div id="TrainerButtonTitle">{{ title }}</div>
       <div id="TrainerButtonInfo">{{ info }}</div>
     </div>
+    <img class="Pokebal" src="images\Group.svg" />
   </div>
 </template>
 

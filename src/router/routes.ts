@@ -4,11 +4,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/IndexPage.vue') },
-
-      { path: '/myTeam', component: () => import('pages/MyTeam.vue') },
-    ],
+    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
   },
 
   {
@@ -21,9 +17,17 @@ const routes: RouteRecordRaw[] = [
 
   {
     path: '/',
+    component: () => import('layouts/TeamLayout.vue'),
+    children: [
+      { path: '/mijnteam', component: () => import('pages/MyTeam.vue') },
+    ],
+  },
+
+  {
+    path: '/',
     component: () => import('layouts/FaveLayout.vue'),
     children: [
-      { path: '/myFave', component: () => import('pages/MyFave.vue') },
+      { path: '/favorieten', component: () => import('pages/MyFave.vue') },
     ],
   },
 
