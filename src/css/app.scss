@@ -149,6 +149,12 @@ body * {
     BlinkMacSystemFont, Roboto, 'Segoe UI', Helvetica, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
+
+.pokedex {
+  position: relative;
+  margin: auto;
+  max-width: 375px;
+}
 // other
 .pokedexTitle {
   height: 41px;
@@ -262,6 +268,7 @@ body * {
 
 .pokemonlist-container {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   margin-left: 1rem;
   gap: 10px;
@@ -544,7 +551,7 @@ body * {
 }
 
 .answer {
-  width: 26px;
+  width: 206px;
   height: 18px;
   left: 159px;
   top: 552px;
@@ -699,6 +706,9 @@ body * {
 
 .detailPageHeader {
   backdrop-filter: blur(20px);
+  position: fixed;
+  max-width: 375px;
+  left: calc((100% - 375px) / 2);
 }
 
 .PokemonDetailContainer {
