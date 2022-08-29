@@ -164,7 +164,7 @@
 
 <script lang="ts">
 import { PokemonService } from 'src/services/pokemonService';
-import { defineComponent, ref, Ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { Pokemon } from 'src/components/models';
 import BackButton from 'src/components/BackButton.vue';
@@ -265,10 +265,12 @@ export default defineComponent({
     },
     // @ts-ignore:next-line
     moves: function (allMoves) {
-      return allMoves
-
-        .filter((move) => move.version_group_details[0].level_learned_at > 0)
-        .slice(0, 4);
+      return (
+        allMoves
+          // @ts-ignore:next-line
+          .filter((move) => move.version_group_details[0].level_learned_at > 0)
+          .slice(0, 4)
+      );
     },
     formatStatName: function (statName: string) {
       const statNameMapping = {
