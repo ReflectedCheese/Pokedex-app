@@ -1,11 +1,14 @@
-<!-- eslint-disable @typescript-eslint/ban-ts-comment -->
 <template>
   <div class="pokedex">
     <q-header class="transparent detailPageHeader">
       <div>
         <BackButton id="Back" @click="goBack()" />
-        <HeartButton class="Heart" />
-        <!-- <HeartButton class="Heart" @click="editFavorites(selectedPokemon)" /> -->
+        <HeartButton
+          v-if="pokemonDetail"
+          class="Heart"
+          @click="editFavorites()"
+          :is-favorite="favorite"
+        />
       </div>
     </q-header>
     <div
@@ -161,11 +164,12 @@
 
 <script lang="ts">
 import { PokemonService } from 'src/services/pokemonService';
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, Ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { Pokemon } from 'src/components/models';
 import BackButton from 'src/components/BackButton.vue';
 import HeartButton from 'src/components/HeartButton.vue';
+
 import VueEasyLightbox from 'vue-easy-lightbox';
 
 export default defineComponent({
@@ -175,12 +179,19 @@ export default defineComponent({
     const route = useRoute();
     let pokemonId;
     const { id } = route.params;
-    const { getPokemonDetail } = PokemonService();
+    const {
+      getPokemonDetail,
+      addToFavorites,
+      getFavoritesIds,
+      removeFromFavorites,
+    } = PokemonService();
     const search = ref('');
     const selectedPokemon = ref();
     const pokemonDetail = ref();
     const pokemonList = ref();
     const visible = ref(false);
+    const favorites = ref([]);
+    favorites.value = getFavoritesIds();
     const hideLightbox = () => (visible.value = false);
     // @ts-ignore:next-line
     getPokemonDetail(id).then((result) => (pokemonDetail.value = result));
@@ -209,8 +220,25 @@ export default defineComponent({
       goBack,
       visible,
       hideLightbox,
+      addToFavorites,
+      getFavoritesIds,
+      removeFromFavorites,
+      favorites,
     };
   },
+  computed: {
+    favorite: function () {
+      if (!this.pokemonDetail) {
+        return false;
+      }
+      if (!this.favorites) {
+        return false;
+      }
+      // @ts-ignore:next-line
+      return this.favorites.some((id: number) => id === this.pokemonDetail.id);
+    },
+  },
+
   methods: {
     formatId: function (id: number) {
       let formattedId = id.toString();
@@ -236,13 +264,11 @@ export default defineComponent({
       return '♂♀';
     },
     // @ts-ignore:next-line
-    moves: function (allMoves: Array) {
-      return (
-        allMoves
-          // @ts-ignore:next-line
-          .filter((move) => move.version_group_details[0].level_learned_at > 0)
-          .slice(0, 4)
-      );
+    moves: function (allMoves) {
+      return allMoves
+
+        .filter((move) => move.version_group_details[0].level_learned_at > 0)
+        .slice(0, 4);
     },
     formatStatName: function (statName: string) {
       const statNameMapping = {
@@ -255,6 +281,17 @@ export default defineComponent({
       };
       // @ts-ignore:next-line
       return statNameMapping[statName.replace('-', '_')];
+    },
+
+    editFavorites: function () {
+      if (this.favorite) {
+        console.debug('removing ' + this.pokemonDetail.name);
+        this.removeFromFavorites(this.pokemonDetail);
+      } else {
+        console.debug('adding ' + this.pokemonDetail.name);
+        this.addToFavorites(this.pokemonDetail);
+      }
+      this.favorites = this.getFavoritesIds();
     },
   },
 
