@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "@vue/cli-plugin-eslint": "^5.0.8",
     "axios": "^0.21.4",
     "core-js": "^3.6.5",
     "fast-sort": "^3.2.0",
