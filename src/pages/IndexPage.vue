@@ -44,7 +44,7 @@
         <TrainerButton
           class="myFave"
           :title="'Favorieten'"
-          :info="'2' + ' pokemons'"
+          :info="favoriteIds ? favoriteIds.length + ' pokemons' : '0 pokemons'"
           @click="onNavigate('/favorieten')"
         />
       </div>
@@ -135,7 +135,7 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     let pokemonId;
-    const { getPokemonList } = PokemonService();
+    const { getPokemonList, getFavoritesIds } = PokemonService();
     const selectedPokemon = ref();
     const pokemonDetail = ref();
     const pokemonList = ref([]);
@@ -143,6 +143,7 @@ export default defineComponent({
     const selectedFilter = ref('');
     const selectedSort = ref('');
     const filteredPokemonList = ref([]);
+    const favoriteIds = getFavoritesIds();
 
     function onNavigate(path: string) {
       router.push({ path }).catch(console.error);
@@ -215,6 +216,7 @@ export default defineComponent({
       filteredPokemonList,
       selectedFilter,
       selectedSort,
+      favoriteIds,
     };
   },
   methods: {
@@ -278,6 +280,10 @@ export default defineComponent({
 .Filter {
   margin-right: 0.6rem;
 }
+
+.sortIcons {
+  margin-top: 0.3rem;
+}
 .sortTitle {
   font-style: normal;
   font-weight: 700;
@@ -287,7 +293,6 @@ export default defineComponent({
   margin-bottom: 1.3rem;
   padding-left: 0.5rem;
 
-  /* Dark 1 */
   color: #1f2029;
 }
 .modal {
@@ -314,6 +319,9 @@ export default defineComponent({
   transition: opacity 0.4s ease-in, visibility 0ms ease-in 0.2s;
 }
 
+.modal-header {
+  border-radius: 10px;
+}
 .modal-content {
   position: fixed;
   max-width: 375px;
@@ -321,6 +329,7 @@ export default defineComponent({
   left: calc((100% - 375px) / 2);
   align-items: center;
   background-color: #fefefe;
+  border-radius: 10px;
   width: 100%;
   -webkit-animation-name: slideIn;
   -webkit-animation-duration: 0.4s;

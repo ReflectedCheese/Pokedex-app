@@ -1,6 +1,7 @@
 <template>
-  <div id="HeartButton">
-    <img class="Heart" src="images\Vector.png" />
+  <div>
+    <img v-if="!isFavorite" src="images\Heart.png" />
+    <img v-if="isFavorite" src="images\HeartFull.png" />
   </div>
 </template>
 
@@ -9,5 +10,11 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'HeartButton',
+  props: {
+    isFavorite: {
+      type: Boolean,
+      required: true,
+    },
+  },
 });
 </script>
