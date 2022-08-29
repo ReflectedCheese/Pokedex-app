@@ -1,7 +1,9 @@
 <template>
   <q-layout view="hHh lpR fFf" class="mainContainer">
     <q-header class="transparent detailPageHeader">
-      <back-button id="Back" @click="goBack()" />
+      <div>
+        <BackButton id="Back" @click="goBack()" />
+      </div>
     </q-header>
     <router-view />
   </q-layout>

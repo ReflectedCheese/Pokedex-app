@@ -1,3 +1,4 @@
+import { Pokemon } from 'src/components/models';
 import { doGet } from './utils';
 
 const PokemonService = () => {
@@ -30,7 +31,35 @@ const PokemonService = () => {
     'fairy',
   ];
 
-  return { getPokemonList, getPokemonDetail, Types };
+  function getFavoritesIds() {
+    // @ts-ignore:next-line
+    return JSON.parse(localStorage.getItem('favorites'));
+  }
+
+  function addToFavorites(pokemon: Pokemon) {
+    const favoritesArray: Array<number> = getFavoritesIds()
+      ? getFavoritesIds()
+      : [];
+    favoritesArray.push(pokemon.id);
+    localStorage.setItem('favorites', JSON.stringify(favoritesArray));
+  }
+
+  function removeFromFavorites(pokemon: Pokemon) {
+    let favoritesArray: Array<number> = getFavoritesIds()
+      ? getFavoritesIds()
+      : [];
+    favoritesArray = favoritesArray.filter((id) => id != pokemon.id);
+    localStorage.setItem('favorites', JSON.stringify(favoritesArray));
+  }
+
+  return {
+    getPokemonList,
+    getPokemonDetail,
+    Types,
+    getFavoritesIds,
+    addToFavorites,
+    removeFromFavorites,
+  };
 };
 
 export { PokemonService };
