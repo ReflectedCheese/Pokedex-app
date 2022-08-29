@@ -1,153 +1,120 @@
 <template>
-  <q-header class="bg-white">
-    <q-toolbar id="toolbar">
-      <img
-        class="Filter"
-        src="images\Filter.png"
-        @click="showFilterModal = true"
-      />
-      <span class="sortIcons" @click="showSortModal = true">
-        <img class="ArrowUp" src="images\ArrowUp.png" />
-        <img class="ArrowDown" src="images\ArrowDown.png" />
-      </span>
-    </q-toolbar>
-  </q-header>
+  <div class="pokedex">
+    <q-header class="bg-white">
+      <q-toolbar class="toolbar">
+        <img
+          class="Filter"
+          src="images\Filter.png"
+          @click="showFilterModal = true"
+        />
+        <span class="sortIcons" @click="showSortModal = true">
+          <img class="ArrowUp" src="images\ArrowUp.png" />
+          <img class="ArrowDown" src="images\ArrowDown.png" />
+        </span>
+      </q-toolbar>
+    </q-header>
 
-  <div id="pokedex">
-    <div class="pokedexTitle">Pokédex</div>
+    <div id="pokedex">
+      <div class="pokedexTitle">Pokédex</div>
 
-    <div class="searchPokemon">
-      <q-input
-        style="width: 343px"
-        rounded
-        standout
-        label="Pokemon zoeken"
-        color="grey-3"
-        id="searchInput"
-        type="search"
-        v-model="searchQuery"
-      >
-        <template v-slot:prepend>
-          <q-icon name="search" />
-        </template>
-      </q-input>
-    </div>
-
-    <div class="button-container">
-      <TrainerButton
-        class="myTeam"
-        :title="'Mijn team'"
-        :info="'4' + ' pokemons'"
-        @click="onNavigate('/mijnteam')"
-      />
-      <TrainerButton
-        class="myFave"
-        :title="'Favorieten'"
-        :info="'2' + ' pokemons'"
-        @click="onNavigate('/favorieten')"
-      />
-    </div>
-    <div class="pokemonlist-container" v-if="pokemonList">
-      <PokemonList
-        v-for="(pokemonInstance, index) in searchedPokemonList"
-        :key="index"
-        :image="pokemonInstance.sprites.front_default"
-        :name="pokemonInstance.name"
-        :id="pokemonInstance.id"
-        :types="pokemonInstance.types"
-        @click="setPokemon(pokemonInstance)"
-      />
-    </div>
-  </div>
-  <div
-    class="modal"
-    :class="{ showModal: showFilterModal, hideModal: !showFilterModal }"
-  >
-    <div class="modal-content">
-      <div class="modal-header">
-        <span @click="showFilterModal = false" class="close">&times;</span>
-        <div class="sortTitle">Filter op</div>
-      </div>
-      <q-select
-        filled
-        id="typeForm"
-        v-model="selectedFilter"
-        :options="filterOptions"
-        label="Type Pokemon"
-      />
-      <div class="formTypeButton">
-        <button
-          class="toepassen"
-          @click="
-            showFilterModal = false;
-            filterPokemonListByType(selectedFilter);
-          "
+      <div class="searchPokemon">
+        <q-input
+          style="width: 343px"
+          rounded
+          standout
+          label="Pokemon zoeken"
+          color="grey-3"
+          id="searchInput"
+          type="search"
+          v-model="searchQuery"
         >
-          Toepassen
-        </button>
+          <template v-slot:prepend>
+            <q-icon name="search" />
+          </template>
+        </q-input>
       </div>
 
-      <!-- @click="filterPokemonListByType('fire')"> -->
+      <div class="button-container">
+        <TrainerButton
+          class="myTeam"
+          :title="'Mijn team'"
+          :info="'4' + ' pokemons'"
+          @click="onNavigate('/mijnteam')"
+        />
+        <TrainerButton
+          class="myFave"
+          :title="'Favorieten'"
+          :info="'2' + ' pokemons'"
+          @click="onNavigate('/favorieten')"
+        />
+      </div>
+      <div class="pokemonlist-container" v-if="pokemonList">
+        <PokemonList
+          v-for="(pokemonInstance, index) in searchedPokemonList"
+          :key="index"
+          :image="pokemonInstance.sprites.front_default"
+          :name="pokemonInstance.name"
+          :id="pokemonInstance.id"
+          :types="pokemonInstance.types"
+          @click="setPokemon(pokemonInstance)"
+        />
+      </div>
     </div>
-  </div>
-  <div
-    class="modal"
-    :class="{ showModal: showSortModal, hideModal: !showSortModal }"
-  >
-    <div class="modal-content">
-      <div class="modal-header">
-        <span @click="showSortModal = false" class="close">&times;</span>
-        <div class="sortTitle">Sorteren op</div>
-
-        <div class="sortField">
-          <q-field rounded outlined class="q-pb-sm">
-            <template v-slot:control>
-              <div
-                class="self-center full-width no-outline"
-                tabindex="0"
-                @click="sortPokemonList('name', 'asc')"
-              >
-                Alfabetisch oplopend
-              </div>
-            </template>
-          </q-field>
-          <q-field rounded outlined class="q-pb-sm">
-            <template v-slot:control>
-              <div
-                class="self-center full-width no-outline"
-                tabindex="0"
-                @click="sortPokemonList('name', 'desc')"
-              >
-                Alfabetisch aflopend
-              </div>
-            </template>
-          </q-field>
-          <q-field rounded outlined class="q-pb-sm">
-            <template v-slot:control>
-              <div
-                class="self-center full-width no-outline"
-                tabindex="0"
-                @click="sortPokemonList('id', 'asc')"
-              >
-                Numeriek oplopend
-              </div>
-            </template>
-          </q-field>
-          <q-field rounded outlined class="q-pb-sm">
-            <template v-slot:control>
-              <div
-                class="self-center full-width no-outline"
-                tabindex="0"
-                @click="sortPokemonList('id', 'desc')"
-              >
-                Numeriek aflopend
-              </div>
-            </template>
-          </q-field>
-
-          <button class="toepassen" @click="showSortModal = false">
+    <div
+      class="modal"
+      :class="{ showModal: showFilterModal, hideModal: !showFilterModal }"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <span @click="showFilterModal = false" class="close">&times;</span>
+          <div class="sortTitle">Filter op</div>
+        </div>
+        <q-select
+          filled
+          id="typeForm"
+          v-model="selectedFilter"
+          :options="filterOptions"
+          label="Type Pokemon"
+        />
+        <div class="formTypeButton">
+          <button
+            class="toepassen"
+            @click="
+              showFilterModal = false;
+              filterPokemonListByType(selectedFilter);
+            "
+          >
             Toepassen
           </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal"
+      :class="{ showModal: showSortModal, hideModal: !showSortModal }"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <span @click="showSortModal = false" class="close">&times;</span>
+          <div class="sortTitle">Sorteren op</div>
+          <q-select
+            filled
+            id="typeForm"
+            v-model="selectedSort"
+            :options="sortOptions"
+            label="Sort Pokemon"
+          />
+          <div class="formTypeButton">
+            <button
+              class="toepassen"
+              @click="
+                showSortModal = false;
+                sortPokemonList(selectedSort);
+              "
+            >
+              Toepassen
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -174,6 +141,7 @@ export default defineComponent({
     const pokemonList = ref([]);
     const searchQuery = ref('');
     const selectedFilter = ref('');
+    const selectedSort = ref('');
     const filteredPokemonList = ref([]);
 
     function onNavigate(path: string) {
@@ -212,6 +180,12 @@ export default defineComponent({
     });
 
     return {
+      sortOptions: [
+        'Alfabetisch oplopend',
+        'Alfabetisch aflopend',
+        'Numeriek oplopend',
+        'Numeriek aflopend',
+      ],
       filterOptions: [
         'grass',
         'fire',
@@ -240,17 +214,31 @@ export default defineComponent({
       onNavigate,
       filteredPokemonList,
       selectedFilter,
+      selectedSort,
     };
   },
   methods: {
-    sortPokemonList(property: string, direction: string) {
-      if (direction === 'asc') {
+    sortPokemonList(selectedSort: string) {
+      const sortOptionMapping = {
+        alfabetisch_oplopend: { direction: 'asc', property: 'name' },
+        alfabetisch_aflopend: { direction: 'desc', property: 'name' },
+        numeriek_oplopend: { direction: 'asc', property: 'id' },
+        numeriek_aflopend: { direction: 'desc', property: 'id' },
+      };
+
+      const options =
         // @ts-ignore:next-line
-        this.filteredPokemonList = sort(this.filteredPokemonList).asc(property);
+        sortOptionMapping[selectedSort.toLowerCase().replace(' ', '_')];
+
+      if (options.direction === 'asc') {
+        // @ts-ignore:next-line
+        this.filteredPokemonList = sort(this.filteredPokemonList).asc(
+          options.property
+        );
       } else {
         // @ts-ignore:next-line
         this.filteredPokemonList = sort(this.filteredPokemonList).desc(
-          property
+          options.property
         );
       }
     },
@@ -265,6 +253,7 @@ export default defineComponent({
           })
         );
       });
+      this.sortPokemonList(this.selectedSort);
     },
   },
   data() {
@@ -279,7 +268,9 @@ export default defineComponent({
 </script>
 
 <style scoped>
-#toolbar {
+.toolbar {
+  position: relative;
+  margin: auto;
   max-width: 370px;
   justify-content: flex-end;
 }
@@ -325,7 +316,10 @@ export default defineComponent({
 
 .modal-content {
   position: fixed;
+  max-width: 375px;
   bottom: 0;
+  left: calc((100% - 375px) / 2);
+  align-items: center;
   background-color: #fefefe;
   width: 100%;
   -webkit-animation-name: slideIn;
@@ -356,6 +350,7 @@ export default defineComponent({
 
 .formTypeButton {
   margin-bottom: 1rem;
+
   margin-top: 1rem;
   margin-left: 3rem;
 }
@@ -365,6 +360,7 @@ export default defineComponent({
   left: 16px;
   top: 734px;
   cursor: pointer;
+  margin-left: -1.5rem;
 
   background: #1f2029;
   border-radius: 100px;

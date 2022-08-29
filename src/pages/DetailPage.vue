@@ -1,145 +1,158 @@
 <!-- eslint-disable @typescript-eslint/ban-ts-comment -->
 <template>
-  <q-header class="transparent detailPageHeader">
-    <div>
-      <BackButton id="Back" @click="goBack()" />
-      <HeartButton class="Heart" />
-      <!-- <HeartButton class="Heart" @click="editFavorites(selectedPokemon)" /> -->
-    </div>
-  </q-header>
-  <div
-    class="PokemonDetailContainer"
-    v-if="pokemonDetail"
-    :class="pokemonDetail.types[0].type.name + 'Background'"
-  >
-    <div class="DetailTitle" v-if="pokemonDetail">
-      {{
-        pokemonDetail.forms[0].name.charAt(0).toUpperCase() +
-        pokemonDetail.forms[0].name.slice(1).split('-')[0]
-      }}
-    </div>
-    <div class="ImageDetailContainer">
-      <div class="DetailImage" v-if="pokemonDetail">
-        <img
-          :src="pokemonDetail.sprites.other['official-artwork'].front_default"
-        />
-        <img class="Shadow" src="images\Ellipse 2.png" />
+  <div class="pokedex">
+    <q-header class="transparent detailPageHeader">
+      <div>
+        <BackButton id="Back" @click="goBack()" />
+        <HeartButton class="Heart" />
+        <!-- <HeartButton class="Heart" @click="editFavorites(selectedPokemon)" /> -->
       </div>
-    </div>
-    <!-- About Section-->
-    <div id="about">
-      <div class="topText">ABOUT</div>
-      <div class="infoContainer">
-        <div id="description">
-          Vanaf de dag dat deze Pokémon wordt geboren, zit er een plantenzaadje
-          op zijn rug. Het zaad wordt langzaam groter.
+    </q-header>
+    <div
+      class="PokemonDetailContainer"
+      v-if="pokemonDetail"
+      :class="pokemonDetail.types[0].type.name + 'Background'"
+    >
+      <div class="DetailTitle" v-if="pokemonDetail">
+        {{
+          pokemonDetail.forms[0].name.charAt(0).toUpperCase() +
+          pokemonDetail.forms[0].name.slice(1).split('-')[0]
+        }}
+      </div>
+      <div class="ImageDetailContainer">
+        <div class="DetailImage" v-if="pokemonDetail">
+          <vue-easy-lightbox
+            :visible="visible"
+            :imgs="
+              pokemonDetail.sprites.other['official-artwork'].front_default
+            "
+            @hide="hideLightbox"
+          ></vue-easy-lightbox>
+          <img
+            @click="visible = true"
+            class="center"
+            id="img"
+            :src="pokemonDetail.sprites.other['official-artwork'].front_default"
+          />
+          <img class="Shadow" src="images\Ellipse 2.png" />
         </div>
-        <div id="aboutList">
-          <div id="type">
-            <div class="info">Type</div>
-            <div class="answer">
-              <div id="typesDetailButton">
-                <div
-                  id="pokemonTypeButton"
-                  v-for="(type, index) in pokemonDetail.types"
-                  :key="index"
-                  :class="type.type.name"
-                >
-                  {{
-                    type.type.name.charAt(0).toUpperCase() +
-                    type.type.name.slice(1)
-                  }}
+        <div></div>
+      </div>
+      <!-- About Section-->
+      <div id="about">
+        <div class="topText">ABOUT</div>
+        <div class="infoContainer">
+          <div id="description">
+            Vanaf de dag dat deze Pokémon wordt geboren, zit er een
+            plantenzaadje op zijn rug. Het zaad wordt langzaam groter.
+          </div>
+          <div id="aboutList">
+            <div id="type">
+              <div class="info">Type</div>
+              <div class="answer">
+                <div id="typesDetailButton">
+                  <div
+                    id="pokemonTypeButton"
+                    v-for="(type, index) in pokemonDetail.types"
+                    :key="index"
+                    :class="type.type.name"
+                  >
+                    {{
+                      type.type.name.charAt(0).toUpperCase() +
+                      type.type.name.slice(1)
+                    }}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div id="number">
-            <div class="info">Nummer</div>
-            <div class="answer">{{ formatId(pokemonDetail.id) }}</div>
-          </div>
-          <div id="height">
-            <div class="info">Hoogte</div>
-            <div class="answer">{{ pokemonDetail.height / 10 }}&nbsp;m</div>
-          </div>
-
-          <div id="weight">
-            <div class="info">Gewicht</div>
-            <div class="answer">{{ pokemonDetail.weight / 10 }}&nbsp;kg</div>
-          </div>
-          <div id="sex">
-            <div class="info">Geslacht</div>
-            <div class="answer" id="sex">
-              {{ gender(pokemonDetail.name) }}
+            <div id="number">
+              <div class="info">Nummer</div>
+              <div class="answer">{{ formatId(pokemonDetail.id) }}</div>
             </div>
-          </div>
+            <div id="height">
+              <div class="info">Hoogte</div>
+              <div class="answer">{{ pokemonDetail.height / 10 }}&nbsp;m</div>
+            </div>
 
-          <div id="ability">
-            <div class="info">Vaardigheden</div>
-            <span class="answer">
-              {{ pokemonDetail.abilities[0].ability.name }}
-            </span>
+            <div id="weight">
+              <div class="info">Gewicht</div>
+              <div class="answer">{{ pokemonDetail.weight / 10 }}&nbsp;kg</div>
+            </div>
+            <div id="sex">
+              <div class="info">Geslacht</div>
+              <div class="answer" id="sex">
+                {{ gender(pokemonDetail.name) }}
+              </div>
+            </div>
+
+            <div id="ability">
+              <div class="info">Vaardigheden</div>
+              <span class="answer">
+                {{ pokemonDetail.abilities[0].ability.name }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- Stats Section-->
-    <div id="stats">
-      <div class="topText">STATISTIEKEN</div>
-      <div class="statContainer">
-        <div>
+      <!-- Stats Section-->
+      <div id="stats">
+        <div class="topText">STATISTIEKEN</div>
+        <div class="statContainer">
+          <div>
+            <div
+              class="row no-wrap"
+              v-for="(stat, index) in pokemonDetail.stats"
+              :key="index"
+            >
+              <div class="info col-2">
+                {{ formatStatName(stat.stat.name) }}
+              </div>
+              <div class="numberStat col-2" id="numberStats">
+                {{ stat.base_stat }}
+              </div>
+              <div class="q-ml-xs q-mr-sm col-6">
+                <q-linear-progress
+                  id="progressBar"
+                  :value="stat.base_stat / 90"
+                  rounded
+                  size="5px"
+                  :color="stat.base_stat > 45 ? 'green' : 'red'"
+                />
+              </div>
+            </div>
+            <div class="row no-wrap">
+              <div class="info col-2">Total</div>
+              <div class="numberStat col-2" id="numberStats90">90</div>
+              <div class="q-ml-xs q-mr-sm col-6">
+                <q-linear-progress
+                  id="progressBar90"
+                  :value="1"
+                  rounded
+                  size="5px"
+                  :color="'green'"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Moveset Section-->
+      <div id="moveset">
+        <div class="topText">MOVESET</div>
+        <div class="movesetContainer" id="movesetContainer">
           <div
-            class="row no-wrap"
-            v-for="(stat, index) in pokemonDetail.stats"
+            class="moveset"
+            v-for="(move, index) in moves(pokemonDetail.moves)"
             :key="index"
           >
-            <div class="info col-2">
-              {{ formatStatName(stat.stat.name) }}
+            <div class="level">
+              Level
+              {{ move.version_group_details[0].level_learned_at }}
             </div>
-            <div class="numberStat col-2" id="numberStats">
-              {{ stat.base_stat }}
-            </div>
-            <div class="q-ml-xs q-mr-sm col-6">
-              <q-linear-progress
-                id="progressBar"
-                :value="stat.base_stat / 90"
-                rounded
-                size="5px"
-                :color="stat.base_stat > 45 ? 'green' : 'red'"
-              />
-            </div>
+            <span class="moveName">
+              {{ move.move.name.replace('-', '&nbsp;') }}
+            </span>
           </div>
-          <div class="row no-wrap">
-            <div class="info col-2">Total</div>
-            <div class="numberStat col-2" id="numberStats90">90</div>
-            <div class="q-ml-xs q-mr-sm col-6">
-              <q-linear-progress
-                id="progressBar90"
-                :value="1"
-                rounded
-                size="5px"
-                :color="'green'"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Moveset Section-->
-    <div id="moveset">
-      <div class="topText">MOVESET</div>
-      <div class="movesetContainer" id="movesetContainer">
-        <div
-          class="moveset"
-          v-for="(move, index) in moves(pokemonDetail.moves)"
-          :key="index"
-        >
-          <div class="level">
-            Level
-            {{ move.version_group_details[0].level_learned_at }}
-          </div>
-          <span class="moveName">
-            {{ move.move.name.replace('-', '&nbsp;') }}
-          </span>
         </div>
       </div>
     </div>
@@ -153,6 +166,7 @@ import { useRouter, useRoute } from 'vue-router';
 import { Pokemon } from 'src/components/models';
 import BackButton from 'src/components/BackButton.vue';
 import HeartButton from 'src/components/HeartButton.vue';
+import VueEasyLightbox from 'vue-easy-lightbox';
 
 export default defineComponent({
   name: 'DetailPage',
@@ -166,6 +180,8 @@ export default defineComponent({
     const selectedPokemon = ref();
     const pokemonDetail = ref();
     const pokemonList = ref();
+    const visible = ref(false);
+    const hideLightbox = () => (visible.value = false);
     // @ts-ignore:next-line
     getPokemonDetail(id).then((result) => (pokemonDetail.value = result));
 
@@ -191,6 +207,8 @@ export default defineComponent({
       search,
       onNavigate,
       goBack,
+      visible,
+      hideLightbox,
     };
   },
   methods: {
@@ -215,7 +233,7 @@ export default defineComponent({
       if (pokemonName.split('-').length > 1) {
         return pokemonName.split('-')[1] === 'm' ? '♂' : '♀';
       }
-      return '♂ ♀';
+      return '♂♀';
     },
     // @ts-ignore:next-line
     moves: function (allMoves: Array) {
@@ -240,7 +258,7 @@ export default defineComponent({
     },
   },
 
-  components: { BackButton, HeartButton },
+  components: { BackButton, HeartButton, VueEasyLightbox },
 });
 </script>
 
@@ -253,8 +271,5 @@ export default defineComponent({
 #numberStats,
 #numberStats90 {
   margin-left: 1rem;
-}
-
-#sex {
 }
 </style>
