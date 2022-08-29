@@ -71,7 +71,7 @@
         </div>
         <q-select
           filled
-          id="typeForm"
+          class="typeForm"
           v-model="selectedFilter"
           :options="filterOptions"
           label="Type Pokemon"
@@ -97,24 +97,24 @@
         <div class="modal-header">
           <span @click="showSortModal = false" class="close">&times;</span>
           <div class="sortTitle">Sorteren op</div>
-          <q-select
-            filled
-            id="typeForm"
-            v-model="selectedSort"
-            :options="sortOptions"
-            label="Sort Pokemon"
-          />
-          <div class="formTypeButton">
-            <button
-              class="toepassen"
-              @click="
-                showSortModal = false;
-                sortPokemonList(selectedSort);
-              "
-            >
-              Toepassen
-            </button>
-          </div>
+        </div>
+        <q-select
+          filled
+          class="typeForm"
+          v-model="selectedSort"
+          :options="sortOptions"
+          label="Sort Pokemon"
+        />
+        <div class="formTypeButton">
+          <button
+            class="toepassen"
+            @click="
+              showSortModal = false;
+              sortPokemonList(selectedSort);
+            "
+          >
+            Toepassen
+          </button>
         </div>
       </div>
     </div>
@@ -348,11 +348,15 @@ export default defineComponent({
   color: #000000;
 }
 
+.typeForm {
+  margin: 0 1rem 1rem 1rem;
+}
+
 .formTypeButton {
   margin-bottom: 1rem;
 
   margin-top: 1rem;
-  margin-left: 3rem;
+  margin-left: 2.6rem;
 }
 .toepassen {
   width: 343px;
