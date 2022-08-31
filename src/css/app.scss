@@ -294,8 +294,9 @@ body * {
 
 #types {
   display: flex;
-  flex-direction: row-reverse;
-  margin-left: 12rem;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-left: 12.3rem;
   margin-top: -2.4rem;
   padding: 3px 10px;
   gap: 10px;
@@ -791,7 +792,7 @@ body * {
 }
 
 .detailPageHeader {
-  backdrop-filter: blur(30px);
+  backdrop-filter: blur(100px);
   position: fixed;
   max-width: 375px;
   left: calc((100% - 375px) / 2);

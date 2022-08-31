@@ -1,6 +1,10 @@
 <template>
   <div class="pokedex">
-    <q-header class="transparent detailPageHeader">
+    <q-header
+      class="transparent detailPageHeader"
+      v-if="pokemonDetail"
+      :class="pokemonDetail.types[0].type.name + 'Background'"
+    >
       <div>
         <BackButton id="Back" @click="goBack()" />
         <HeartButton
