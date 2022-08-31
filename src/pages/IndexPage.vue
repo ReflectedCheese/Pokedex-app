@@ -14,51 +14,49 @@
       </q-toolbar>
     </q-header>
 
-    <div id="pokedex">
-      <div class="pokedexTitle">Pokédex</div>
+    <div class="pokedexTitle">Pokédex</div>
 
-      <div class="searchPokemon">
-        <q-input
-          style="width: 343px"
-          rounded
-          standout
-          label="Pokemon zoeken"
-          color="grey-3"
-          id="searchInput"
-          type="search"
-          v-model="searchQuery"
-        >
-          <template v-slot:prepend>
-            <q-icon name="search" />
-          </template>
-        </q-input>
-      </div>
+    <div class="searchPokemon">
+      <q-input
+        style="width: 343px"
+        rounded
+        standout
+        label="Pokemon zoeken"
+        color="grey-3"
+        id="searchInput"
+        type="search"
+        v-model="searchQuery"
+      >
+        <template v-slot:prepend>
+          <q-icon name="search" />
+        </template>
+      </q-input>
+    </div>
 
-      <div class="button-container">
-        <TrainerButton
-          class="myTeam"
-          :title="'Mijn team'"
-          :info="'4' + ' pokemons'"
-          @click="onNavigate('/mijnteam')"
-        />
-        <TrainerButton
-          class="myFave"
-          :title="'Favorieten'"
-          :info="favoriteIds ? favoriteIds.length + ' pokemons' : '0 pokemons'"
-          @click="onNavigate('/favorieten')"
-        />
-      </div>
-      <div class="pokemonlist-container" v-if="pokemonList">
-        <PokemonList
-          v-for="(pokemonInstance, index) in searchedPokemonList"
-          :key="index"
-          :image="pokemonInstance.sprites.front_default"
-          :name="pokemonInstance.name"
-          :id="pokemonInstance.id"
-          :types="pokemonInstance.types"
-          @click="setPokemon(pokemonInstance)"
-        />
-      </div>
+    <div class="button-container">
+      <TrainerButton
+        class="myTeam"
+        :title="'Mijn team'"
+        :info="'4' + ' pokemons'"
+        @click="onNavigate('/mijnteam')"
+      />
+      <TrainerButton
+        class="myFave"
+        :title="'Favorieten'"
+        :info="favoriteIds ? favoriteIds.length + ' pokemons' : '0 pokemons'"
+        @click="onNavigate('/favorieten')"
+      />
+    </div>
+    <div class="pokemonlist-container" v-if="pokemonList">
+      <PokemonList
+        v-for="(pokemonInstance, index) in searchedPokemonList"
+        :key="index"
+        :image="pokemonInstance.sprites.front_default"
+        :name="pokemonInstance.name"
+        :id="pokemonInstance.id"
+        :types="pokemonInstance.types"
+        @click="setPokemon(pokemonInstance)"
+      />
     </div>
     <div
       class="modal"
@@ -268,171 +266,3 @@ export default defineComponent({
   components: { PokemonList, TrainerButton },
 });
 </script>
-
-<style scoped>
-.toolbar {
-  position: relative;
-  margin: auto;
-  max-width: 370px;
-  justify-content: flex-end;
-}
-
-.Filter {
-  margin-right: 0.6rem;
-}
-
-.sortIcons {
-  margin-top: 0.3rem;
-}
-.sortTitle {
-  font-style: normal;
-  font-weight: 700;
-  font-size: 17px;
-  line-height: 20px;
-  letter-spacing: -0.408px;
-  margin-bottom: 1.3rem;
-  padding-left: 0.5rem;
-
-  color: #1f2029;
-}
-.modal {
-  position: fixed;
-  z-index: 2000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.showModal {
-  visibility: visible;
-  opacity: 1;
-  transition: opacity 0.4s ease-in, visibility 0ms ease-in 0ms;
-}
-
-.hideModal {
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.4s ease-in, visibility 0ms ease-in 0.2s;
-}
-
-.modal-header {
-  border-radius: 10px;
-}
-.modal-content {
-  position: fixed;
-  max-width: 375px;
-  bottom: 0;
-  left: calc((100% - 375px) / 2);
-  align-items: center;
-  background-color: #fefefe;
-  border-radius: 10px;
-  width: 100%;
-  -webkit-animation-name: slideIn;
-  -webkit-animation-duration: 0.4s;
-  animation-name: slideIn;
-  animation-duration: 0.4s;
-}
-
-.sortItems {
-  width: 346px;
-  height: 40px;
-  left: 13px;
-  top: 518px;
-  cursor: pointer;
-  margin-bottom: 0.8rem;
-  background: #f7f7f9;
-  border-radius: 10px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 18px;
-  padding-left: 10px;
-
-  letter-spacing: -0.408px;
-
-  color: #000000;
-}
-
-.typeForm {
-  margin: 0 1rem 1rem 1rem;
-}
-
-.formTypeButton {
-  margin-bottom: 1rem;
-
-  margin-top: 1rem;
-  margin-left: 2.6rem;
-}
-.toepassen {
-  width: 343px;
-  height: 44px;
-  left: 16px;
-  top: 734px;
-  cursor: pointer;
-  margin-left: -1.5rem;
-
-  background: #1f2029;
-  border-radius: 100px;
-
-  font-style: normal;
-  font-weight: 700;
-  font-size: 17px;
-  line-height: 20px;
-  letter-spacing: -0.408px;
-
-  color: #ffffff;
-}
-
-.close {
-  color: grey;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.modal-header {
-  padding: 30px 20px;
-  background-color: white;
-
-  font-style: normal;
-  font-weight: 700;
-  font-size: 17px;
-  line-height: 20px;
-  letter-spacing: -0.408px;
-
-  color: #1f2029;
-}
-
-@-webkit-keyframes slideIn {
-  from {
-    bottom: -300px;
-    opacity: 0;
-  }
-  to {
-    bottom: 0;
-    opacity: 1;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    bottom: -300px;
-    opacity: 0;
-  }
-  to {
-    bottom: 0;
-    opacity: 1;
-  }
-}
-</style>

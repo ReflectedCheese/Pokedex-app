@@ -11,12 +11,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-// import TrainerButton from 'components/TrainerButton.vue';
 import { useRouter } from 'vue-router';
 import BackButton from 'src/components/BackButton.vue';
 
 export default defineComponent({
-  // components: { TrainerButton },
   name: 'FaveLayout',
   setup() {
     const router = useRouter();
@@ -35,9 +33,3 @@ export default defineComponent({
   components: { BackButton },
 });
 </script>
-
-<style scoped>
-.mainContainer {
-  background: linear-gradient(109.73deg, #65cb9a 0%, #15d0dc 100%);
-}
-</style>
