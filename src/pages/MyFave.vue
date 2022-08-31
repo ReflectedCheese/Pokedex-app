@@ -60,22 +60,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-.faveTitle {
-  margin-top: 3rem;
-  display: flex;
-  height: 41px;
-  left: 16px;
-  right: 16px;
-
-  font-style: normal;
-  font-weight: 700;
-  font-size: 34px;
-  line-height: 41px;
-
-  letter-spacing: 0.374px;
-
-  color: white;
-}
-</style>

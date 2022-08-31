@@ -150,7 +150,10 @@ body * {
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
-.pokedex {
+// IndexPage
+
+.pokedex,
+.mainContainer {
   position: relative;
   margin: auto;
   max-width: 375px;
@@ -163,14 +166,11 @@ body * {
   left: 16px;
   right: 16px;
   top: 90px;
-
   font-style: normal;
   font-weight: 700;
   font-size: 34px;
   line-height: 41px;
-
   letter-spacing: 0.374px;
-
   color: #1f2029;
 }
 
@@ -191,14 +191,13 @@ body * {
 }
 
 // Trainerbuttons
+
 .myTeam {
   display: flex;
-
   width: 167px;
   height: 100px;
   left: 16px;
   top: 200px;
-
   background: linear-gradient(109.73deg, #46469c 0%, #7e32e0 100%);
   border-radius: 10px;
 }
@@ -213,8 +212,6 @@ body * {
   height: 100px;
   left: 192px;
   top: 200px;
-
-  /* Green Gradient */
   background: linear-gradient(109.73deg, #65cb9a 0%, #15d0dc 100%);
   border-radius: 10px;
 }
@@ -230,41 +227,34 @@ body * {
   height: 22px;
   left: 31px;
   top: 246px;
-
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 22px;
-
-  /* identical to box height, or 122% */
   letter-spacing: -0.408px;
-
   color: #ffffff;
 }
 
 #TrainerButtonInfo {
   display: flex;
   margin-left: 1rem;
-
   width: 84px;
   height: 22px;
   left: 31px;
   top: 268px;
-
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 22px;
-
-  /* identical to box height, or 147% */
   letter-spacing: -0.408px;
-
   color: rgba(255, 255, 255, 0.5);
 }
 
 .Pokebal {
   margin-left: -1rem;
 }
+
+// PokemonList
 
 .pokemonlist-container {
   display: flex;
@@ -277,12 +267,10 @@ body * {
 
 .listItem {
   display: flex;
-
   width: 340px;
   height: 70px;
   left: 19px;
   top: 320px;
-
   background: #ffffff;
   box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.04);
   border-radius: 10px;
@@ -309,38 +297,32 @@ body * {
   flex-direction: row-reverse;
   margin-left: 12rem;
   margin-top: -2.4rem;
-
   padding: 3px 10px;
   gap: 10px;
   border-radius: 10px;
   width: 52px;
   height: 20px;
-
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 0px;
   text-align: right;
   letter-spacing: 0.374px;
-
   color: #ffffff;
 }
 
 #name {
   display: flex;
   margin-top: 1rem;
-
   width: 54px;
   height: 20px;
   left: 99px;
   top: 335px;
-
   font-style: normal;
   font-weight: 700;
   font-size: 17px;
   line-height: 20px;
   letter-spacing: 0.374px;
-
   color: #000000;
 }
 
@@ -350,15 +332,11 @@ body * {
   height: 18px;
   left: 99px;
   top: 356px;
-
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 18px;
-
-  /* identical to box height */
   letter-spacing: 0.374px;
-
   color: #919698;
 }
 
@@ -369,10 +347,155 @@ body * {
   right: 0%;
   top: 0%;
   bottom: 0%;
-
   color: #babec2;
 }
 
+// Header
+
+.toolbar {
+  position: relative;
+  margin: auto;
+  max-width: 370px;
+  justify-content: flex-end;
+}
+
+.Filter {
+  margin-right: 0.6rem;
+  cursor: pointer;
+}
+
+.sortIcons {
+  margin-top: 0.3rem;
+  cursor: pointer;
+}
+.sortTitle {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: -0.408px;
+  margin-bottom: 1.3rem;
+  padding-left: 0.5rem;
+  color: #1f2029;
+}
+
+// Modal
+.modal {
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.showModal {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.4s ease-in, visibility 0ms ease-in 0ms;
+}
+
+.hideModal {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.4s ease-in, visibility 0ms ease-in 0.2s;
+}
+
+.modal-content {
+  position: fixed;
+  max-width: 375px;
+  bottom: 0;
+  left: calc((100% - 375px) / 2);
+  align-items: center;
+  background-color: #fefefe;
+  border-radius: 10px;
+  width: 100%;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s;
+}
+
+.typeForm {
+  margin: 0 1rem 1rem 1rem;
+}
+
+.formTypeButton {
+  margin-bottom: 1rem;
+
+  margin-top: 1rem;
+  margin-left: 2.6rem;
+}
+.toepassen {
+  width: 343px;
+  height: 44px;
+  left: 16px;
+  top: 734px;
+  cursor: pointer;
+  margin-left: -1.5rem;
+  background: #1f2029;
+  border-radius: 100px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: -0.408px;
+  color: #ffffff;
+}
+
+.close {
+  color: grey;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 30px 20px;
+  background-color: white;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: -0.408px;
+  border-radius: 10px;
+  color: #1f2029;
+}
+@keyframes slideIn {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+// DetailPage
+
+// Header
 #Back {
   display: flex;
   flex-direction: row;
@@ -385,15 +508,12 @@ body * {
   display: flex;
   width: 18px;
   height: 24px;
-
   font-style: normal;
   font-weight: 500;
   font-size: 23px;
   line-height: 24px;
-
   text-align: center;
   letter-spacing: 0.38px;
-
   color: white;
 }
 
@@ -401,16 +521,13 @@ body * {
   display: flex;
   width: 44px;
   height: 22px;
-
   font-style: normal;
   font-weight: 400;
   font-size: 17px;
   line-height: 22px;
-
   display: flex;
   align-items: center;
   letter-spacing: -0.408px;
-
   color: white;
 }
 
@@ -419,16 +536,12 @@ body * {
   height: 41px;
   left: 16px;
   right: 16px;
-
   margin-left: 1rem;
-
   font-style: normal;
   font-weight: 700;
   font-size: 34px;
   line-height: 41px;
-
   letter-spacing: 0.374px;
-
   color: white;
 }
 
@@ -449,7 +562,6 @@ body * {
   left: 81px;
   z-index: 1;
   margin-top: -2rem;
-
   background: rgba(0, 0, 0, 0.3);
   filter: blur(15px);
 }
@@ -463,7 +575,6 @@ body * {
   top: 420px;
   margin-left: 1rem;
   margin-bottom: 2rem;
-
   background: #ffffff;
   box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.04);
   border-radius: 10px;
@@ -478,13 +589,11 @@ body * {
   height: 54px;
   left: 36px;
   top: 443px;
-
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 18px;
   letter-spacing: -0.408px;
-
   color: #000000;
 }
 
@@ -495,14 +604,12 @@ body * {
   top: 399px;
   margin-left: 1.1rem;
   margin-bottom: 0.5rem;
-
   font-style: normal;
   font-weight: 700;
   font-size: 12px;
   line-height: 14px;
   text-align: center;
   letter-spacing: 0.374px;
-
   color: #ffffff;
 }
 
@@ -514,36 +621,29 @@ body * {
   top: 552px;
   margin-left: 1rem;
   margin-bottom: 1rem;
-
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 18px;
-
   letter-spacing: -0.408px;
-
   color: #acb2c1;
 }
 
 .answerButtonText {
   display: flex;
-
   margin-left: 0.5rem;
-
   padding: 3px 10px;
   gap: 10px;
   border-radius: 10px;
   width: 52px;
   height: 20px;
   left: 214px;
-
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
   text-align: right;
   letter-spacing: 0.374px;
-
   color: #ffffff;
 }
 
@@ -554,14 +654,22 @@ body * {
   top: 552px;
   margin-left: 5rem;
   margin-bottom: 1rem;
-
   font-style: normal;
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;
-
   letter-spacing: -0.408px;
   color: #1f2029;
+}
+
+#progressBar,
+#progressBar90 {
+  margin-top: 0.4rem;
+}
+
+#numberStats,
+#numberStats90 {
+  margin-left: 1rem;
 }
 
 .answer::first-letter {
@@ -570,9 +678,7 @@ body * {
 
 #pokemonTypeInfoButton {
   display: flex;
-
   border-radius: 10px;
-
   width: 65px;
   height: 20px;
 }
@@ -583,13 +689,11 @@ body * {
   gap: 5px;
   width: 52px;
   height: 20px;
-
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 0;
   letter-spacing: 0.374px;
-
   color: #ffffff;
 }
 
@@ -616,7 +720,6 @@ body * {
   height: 280px;
   left: 16px;
   top: 802px;
-
   background: #ffffff;
   box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.04);
   border-radius: 10px;
@@ -628,7 +731,6 @@ body * {
   font-size: 15px;
   line-height: 18px;
   margin-left: 0.5rem;
-
   letter-spacing: -0.408px;
   color: #1f2029;
 }
@@ -637,14 +739,12 @@ body * {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-
   margin-left: 1rem;
   margin-bottom: 2rem;
   width: 343px;
   height: 105px;
   left: 16px;
   top: 1077px;
-
   background: #ffffff;
   box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.04);
   border-radius: 10px;
@@ -658,23 +758,19 @@ body * {
 .level {
   display: flex;
   align-items: center;
-
   background-color: rgba(164, 126, 189, 0.719);
   border: 1.3px solid rgb(126, 39, 184);
   padding: 0.8rem 1rem;
   border-radius: 1rem;
   margin: 1rem 0.5rem 0.5rem 1rem;
-
   width: 4.3rem;
   height: 1.3rem;
-
   font-style: normal;
   font-weight: 800;
   font-size: 9px;
   line-height: 14px;
   text-align: center;
   letter-spacing: -0.5px;
-
   color: #643cc0;
 }
 
@@ -682,14 +778,11 @@ body * {
   width: 4rem;
   height: 20px;
   left: 108px;
-
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
   line-height: 55px;
-
   letter-spacing: -0.5px;
-
   color: #1f2029;
 }
 
@@ -713,4 +806,25 @@ body * {
 .Heart {
   margin-top: -1.1rem;
   margin-left: 330px;
+  cursor: pointer;
+}
+
+// Fave Page
+
+.faveTitle {
+  margin-top: 3rem;
+  display: flex;
+  height: 41px;
+  left: 16px;
+  right: 16px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 41px;
+  letter-spacing: 0.374px;
+  color: white;
+}
+
+.mainContainer {
+  background: linear-gradient(109.73deg, #65cb9a 0%, #15d0dc 100%);
 }
