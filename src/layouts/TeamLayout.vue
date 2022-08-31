@@ -9,12 +9,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-// import TrainerButton from 'components/TrainerButton.vue';
 import { useRouter } from 'vue-router';
 import BackButton from 'src/components/BackButton.vue';
 
 export default defineComponent({
-  // components: { TrainerButton },
   name: 'TeamLayout',
   setup() {
     const router = useRouter();
