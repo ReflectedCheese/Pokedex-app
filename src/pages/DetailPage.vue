@@ -301,14 +301,4 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-#progressBar,
-#progressBar90 {
-  margin-top: 0.4rem;
-}
-
-#numberStats,
-#numberStats90 {
-  margin-left: 1rem;
-}
-</style>
+<style scoped></style>
