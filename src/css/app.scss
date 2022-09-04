@@ -653,7 +653,7 @@ body * {
   height: 18px;
   left: 159px;
   top: 552px;
-  margin-left: 5rem;
+  margin-left: 4rem;
   margin-bottom: 1rem;
   font-style: normal;
   font-weight: 500;
@@ -706,7 +706,8 @@ body * {
 #height,
 #weight,
 #sex,
-#ability {
+#ability,
+#category {
   display: flex;
   flex-direction: row;
 }
@@ -764,7 +765,7 @@ body * {
   padding: 0.8rem 1rem;
   border-radius: 1rem;
   margin: 1rem 0.5rem 0.5rem 1rem;
-  width: 4.3rem;
+  width: 4.5rem;
   height: 1.3rem;
   font-style: normal;
   font-weight: 800;

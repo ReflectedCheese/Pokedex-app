@@ -50,8 +50,12 @@
         <div class="topText">ABOUT</div>
         <div class="infoContainer">
           <div id="description">
-            Vanaf de dag dat deze Pokémon wordt geboren, zit er een
-            plantenzaadje op zijn rug. Het zaad wordt langzaam groter.
+            {{
+              pokemonSpecies.flavor_text_entries[0].flavor_text.replace(
+                'POKéMON',
+                'Pokémon'
+              )
+            }}
           </div>
           <div id="aboutList">
             <div id="type">
@@ -84,6 +88,12 @@
             <div id="weight">
               <div class="info">Gewicht</div>
               <div class="answer">{{ pokemonDetail.weight / 10 }}&nbsp;kg</div>
+            </div>
+            <div id="category">
+              <div class="info">Categorie</div>
+              <div class="answer">
+                {{ pokemonSpecies.genera[7].genus.replace('Pokémon', '') }}
+              </div>
             </div>
             <div id="sex">
               <div class="info">Geslacht</div>
@@ -162,6 +172,19 @@
           </div>
         </div>
       </div>
+      <!-- Evolutions -->
+      <!-- <div class="pokemonlist-container" v-if="pokemonEvolution">
+        <div class="topText">EVOLUTIE</div>
+        <PokemonList
+          v-for="(pokemonInstance, index) in pokemonEvolution"
+          :key="index"
+          :image="pokemonInstance.sprites.front_default"
+          :name="pokemonInstance.name"
+          :id="pokemonInstance.id"
+          :types="pokemonInstance.types"
+          @click="setPokemon(pokemonInstance)"
+        />
+      </div> -->
     </div>
   </div>
 </template>
@@ -185,6 +208,8 @@ export default defineComponent({
     const { id } = route.params;
     const {
       getPokemonDetail,
+      getPokemonSpecies,
+      getPokemonEvolution,
       addToFavorites,
       getFavoritesIds,
       removeFromFavorites,
@@ -192,6 +217,8 @@ export default defineComponent({
     const search = ref('');
     const selectedPokemon = ref();
     const pokemonDetail = ref();
+    const pokemonSpecies = ref();
+    const pokemonEvolution = ref();
     const pokemonList = ref();
     const visible = ref(false);
     const favorites = ref([]);
@@ -199,6 +226,10 @@ export default defineComponent({
     const hideLightbox = () => (visible.value = false);
     // @ts-ignore:next-line
     getPokemonDetail(id).then((result) => (pokemonDetail.value = result));
+    // @ts-ignore:next-line
+    getPokemonSpecies(id).then((result) => (pokemonSpecies.value = result));
+    // @ts-ignore:next-line
+    getPokemonEvolution(id).then((result) => (pokemonEvolution.value = result));
 
     function goBack() {
       router.go(-1);
@@ -217,6 +248,8 @@ export default defineComponent({
       selectedPokemon,
       setPokemon,
       pokemonDetail,
+      pokemonSpecies,
+      pokemonEvolution,
       pokemonList,
       pokemonId,
       search,
