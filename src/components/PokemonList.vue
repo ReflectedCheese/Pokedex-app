@@ -1,5 +1,8 @@
 <template>
   <div class="listItem">
+    <!-- <q-card-section>
+      <q-skeleton type="QSlider" /> -->
+
     <img id="listImage" :src="`${image}`" alt="Pokémon" />
     <div id="pokemonIdentifiers">
       <div id="name">
@@ -18,12 +21,14 @@
       </div>
       <div id="pointSymbol">&#10095;</div>
     </div>
+    <!-- </q-card-section> -->
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { PokemonService } from 'src/services/pokemonService';
+import { QSlider } from 'quasar';
 
 export default defineComponent({
   name: 'PokemonListComponent',
@@ -52,7 +57,7 @@ export default defineComponent({
   setup() {
     const { Types } = PokemonService();
 
-    return { Types };
+    return { Types, QSlider };
   },
 });
 </script>

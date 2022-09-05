@@ -1,58 +1,58 @@
 // type buttons
 .normalBackground {
-  background-color: #a3acae;
+  background: linear-gradient(180deg, #a3acae 0%, #e0e2e2 100%);
 }
 
 .fireBackground {
-  background-color: #fd7d25;
+  background: linear-gradient(180deg, #fd7d25 0%, #f5ad7c 100%);
 }
 
 .waterBackground {
-  background-color: #4592c3;
+  background: linear-gradient(180deg, #4592c3 0%, #88aec6 100%);
 }
 
 .electricBackground {
-  background-color: #dcdc16;
+  background: linear-gradient(180deg, #dcdc16 0%, #d3d395 100%);
 }
 
 .grassBackground {
-  background-color: #95c24d;
+  background: linear-gradient(180deg, #95c24d 0%, #afc093 100%);
 }
 
 .iceBackground {
-  background-color: #06bfbf;
+  background: linear-gradient(180deg, #06bfbf 0%, #84b8b8 100%);
 }
 
 .fightingBackground {
-  background-color: #a04623;
+  background: linear-gradient(180deg, #a04623 0%, #a06f5c 100%);
 }
 
 .poisonBackground {
-  background-color: #ba7ec8;
+  background: linear-gradient(180deg, #ba7ec8 0%, #ba9bc1 100%);
 }
 
 .groundBackground {
-  background-color: #b48966;
+  background: linear-gradient(180deg, #b48966 0%, #b09b8a 100%);
 }
 
 .flyingBackground {
-  background-color: #83bec2;
+  background: linear-gradient(180deg, #83bec2 0%, #aec1c2 100%);
 }
 
 .psychicBackground {
-  background-color: #d65d95;
+  background: linear-gradient(180deg, #d65d95 0%, #d69cb7 100%);
 }
 
 .bugBackground {
-  background-color: #2b5e26;
+  background: linear-gradient(180deg, #2b5e26 0%, #425940 100%);
 }
 
 .rockBackground {
-  background-color: burlywood;
+  background: linear-gradient(180deg, #deb784 0%, #d5bfa2 100%);
 }
 
 .ghostBackground {
-  background-color: #7b62a3;
+  background: linear-gradient(180deg, #7b62a3 0%, #8a7ca2 100%);
 }
 
 .dragonBackground {
@@ -549,7 +549,7 @@ body * {
   max-width: 375px;
   z-index: 2;
   left: calc((100% - 375px) / 2);
-  bottom: 0;
+
   align-items: center;
   background: #1f2029;
   border-radius: 100px;
@@ -797,6 +797,7 @@ body * {
   background: #ffffff;
   box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.04);
   border-radius: 10px;
+  margin-bottom: 12rem;
 }
 
 .moveset {
@@ -812,7 +813,7 @@ body * {
   padding: 0.8rem 1rem;
   border-radius: 1rem;
   margin: 1rem 0.5rem 0.5rem 1rem;
-  width: 4.5rem;
+  width: 4.4rem;
   height: 1.3rem;
   font-style: normal;
   font-weight: 800;
@@ -829,7 +830,8 @@ body * {
   left: 108px;
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 11px;
+  margin-top: 0.1rem;
   line-height: 55px;
   letter-spacing: -0.5px;
   color: #1f2029;
