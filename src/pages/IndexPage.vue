@@ -37,7 +37,7 @@
       <TrainerButton
         class="myTeam"
         :title="'Mijn team'"
-        :info="'4' + ' pokemons'"
+        :info="myTeamIds ? myTeamIds.length + ' pokemons' : '0 pokemons'"
         @click="onNavigate('/mijnteam')"
       />
       <TrainerButton
@@ -133,7 +133,13 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     let pokemonId;
-    const { getPokemonList, getFavoritesIds } = PokemonService();
+    const {
+      getPokemonList,
+      getFavoritesIds,
+      getMyTeamIds,
+      addToMyTeam,
+      removeFromMyTeam,
+    } = PokemonService();
     const selectedPokemon = ref();
     const pokemonDetail = ref();
     const pokemonList = ref([]);
@@ -142,6 +148,9 @@ export default defineComponent({
     const selectedSort = ref('');
     const filteredPokemonList = ref([]);
     const favoriteIds = getFavoritesIds();
+    const myTeamIds = getMyTeamIds();
+    const myTeams = ref([]);
+    myTeams.value = getMyTeamIds();
 
     function onNavigate(path: string) {
       router.push({ path }).catch(console.error);
@@ -215,6 +224,10 @@ export default defineComponent({
       selectedFilter,
       selectedSort,
       favoriteIds,
+      addToMyTeam,
+      getMyTeamIds,
+      removeFromMyTeam,
+      myTeamIds,
     };
   },
   methods: {
@@ -255,6 +268,17 @@ export default defineComponent({
       });
       this.sortPokemonList(this.selectedSort);
     },
+
+    // editTeam: function () {
+    //   if (this.myTeam) {
+    //     console.debug('removing ' + this.pokemonDetail.name);
+    //     this.removeFromMyTeam(this.pokemonDetail);
+    //   } else {
+    //     console.debug('adding ' + this.pokemonDetail.name);
+    //     this.addToMyTeam(this.pokemonDetail);
+    //   }
+    //   this.myTeams = this.getMyTeamIds();
+    // },
   },
   data() {
     return {
