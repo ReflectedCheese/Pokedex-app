@@ -43,7 +43,13 @@
           />
           <img class="Shadow" src="images\Ellipse 2.png" />
         </div>
-        <div></div>
+        <MyTeamButton
+          v-if="pokemonDetail"
+          class="TeamButton"
+          @click="editTeam()"
+          :isMyTeam="myTeam"
+          :isFull="isTeamFull"
+        />
       </div>
       <!-- About Section-->
       <div id="about">
@@ -51,7 +57,7 @@
         <div class="infoContainer">
           <div id="description">
             {{
-              pokemonSpecies.flavor_text_entries[0].flavor_text.replace(
+              pokemonSpecies.flavor_text_entries[1].flavor_text.replace(
                 'POKéMON',
                 'Pokémon'
               )
@@ -198,6 +204,7 @@ import BackButton from 'src/components/BackButton.vue';
 import HeartButton from 'src/components/HeartButton.vue';
 
 import VueEasyLightbox from 'vue-easy-lightbox';
+import MyTeamButton from 'src/components/MyTeamButton.vue';
 
 export default defineComponent({
   name: 'DetailPage',
@@ -213,6 +220,9 @@ export default defineComponent({
       addToFavorites,
       getFavoritesIds,
       removeFromFavorites,
+      addToMyTeam,
+      getMyTeamIds,
+      removeFromMyTeam,
     } = PokemonService();
     const search = ref('');
     const selectedPokemon = ref();
@@ -222,6 +232,8 @@ export default defineComponent({
     const pokemonList = ref();
     const visible = ref(false);
     const favorites = ref([]);
+    const myTeams = ref([]);
+    myTeams.value = getMyTeamIds();
     favorites.value = getFavoritesIds();
     const hideLightbox = () => (visible.value = false);
     // @ts-ignore:next-line
@@ -261,6 +273,10 @@ export default defineComponent({
       getFavoritesIds,
       removeFromFavorites,
       favorites,
+      myTeams,
+      addToMyTeam,
+      getMyTeamIds,
+      removeFromMyTeam,
     };
   },
   computed: {
@@ -273,6 +289,27 @@ export default defineComponent({
       }
       // @ts-ignore:next-line
       return this.favorites.some((id: number) => id === this.pokemonDetail.id);
+    },
+
+    myTeam: function () {
+      if (!this.pokemonDetail) {
+        return false;
+      }
+      if (!this.myTeams) {
+        return false;
+      }
+      // @ts-ignore:next-line
+      return this.myTeams.some((id: number) => id === this.pokemonDetail.id);
+    },
+    isTeamFull: function () {
+      if (!this.pokemonDetail) {
+        return false;
+      }
+      if (!this.myTeams) {
+        return false;
+      }
+      // @ts-ignore:next-line
+      return this.myTeams.length >= 6;
     },
   },
 
@@ -332,10 +369,19 @@ export default defineComponent({
       }
       this.favorites = this.getFavoritesIds();
     },
+
+    editTeam: function () {
+      if (this.myTeam) {
+        console.debug('removing ' + this.pokemonDetail.name);
+        this.removeFromMyTeam(this.pokemonDetail);
+      } else if (!this.isTeamFull) {
+        console.debug('adding ' + this.pokemonDetail.name);
+        this.addToMyTeam(this.pokemonDetail);
+      }
+      this.myTeams = this.getMyTeamIds();
+    },
   },
 
-  components: { BackButton, HeartButton, VueEasyLightbox },
+  components: { BackButton, HeartButton, VueEasyLightbox, MyTeamButton },
 });
 </script>
-
-<style scoped></style>

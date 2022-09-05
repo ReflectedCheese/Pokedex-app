@@ -63,19 +63,19 @@ const PokemonService = () => {
 
   function getMyTeamIds() {
     // @ts-ignore:next-line
-    return JSON.parse(localStorage.getItem('myTeam'));
+    return JSON.parse(localStorage.getItem('myTeams'));
   }
 
   function addToMyTeam(pokemon: Pokemon) {
     const myTeamArray: Array<number> = getMyTeamIds() ? getMyTeamIds() : [];
     myTeamArray.push(pokemon.id);
-    localStorage.setItem('myTeam', JSON.stringify(myTeamArray));
+    localStorage.setItem('myTeams', JSON.stringify(myTeamArray));
   }
 
   function removeFromMyTeam(pokemon: Pokemon) {
     let myTeamArray: Array<number> = getMyTeamIds() ? getMyTeamIds() : [];
     myTeamArray = myTeamArray.filter((id) => id != pokemon.id);
-    localStorage.setItem('myTeam', JSON.stringify(myTeamArray));
+    localStorage.setItem('myTeams', JSON.stringify(myTeamArray));
   }
 
   return {
